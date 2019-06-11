@@ -1,0 +1,6 @@
+Bundle-Name: ${project.name}
+Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
+Bundle-Version: ${project.version}
+Export-Package: com.esa.bmap.restclient.api
+
+  

@@ -1,0 +1,9 @@
+Bundle-Name: ${project.name}
+Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
+Bundle-Version: ${project.version}
+Fragment-Host:  com.liferay.login.web;bundle-version="3.0.4"
+-jsp: *.jsp,*.jspf
+-plugin.jsp: com.liferay.ant.bnd.jsp.JspAnalyzerPlugin
+-plugin.resourcebundle: com.liferay.ant.bnd.resource.bundle.ResourceBundleLoaderAnalyzerPlugin
+-plugin.sass: com.liferay.ant.bnd.sass.SassAnalyzerPlugin
+-sass: *

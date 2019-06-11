@@ -1,0 +1,1 @@
+This file has been added because the package should not be empty. Jenkis doesn't support an empty project
