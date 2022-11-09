@@ -1,0 +1,20 @@
+Bundle-Name: ${project.name}
+Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
+Bundle-Version: ${project.version}
+Export-Package: com.esa.maap.administration.portlet.constants
+Import-Package: \
+    com.liferay.portal.kernel.portlet.bridges.mvc;version="3.0.0",\
+    javax.portlet;version="[2.0,3)", \
+	com.esa.bmap.model, \
+	com.esa.bmap.common.*, \
+	com.esa.maap.algorithm.api, \
+	com.esa.maap.usermanagement.api, \
+    *;resolution:=optional
+-contract: JavaPortlet,JavaServlet
+-jsp: *.jsp,*.jspf
+-metatype: *
+-plugin.jsp: com.liferay.ant.bnd.jsp.JspAnalyzerPlugin
+-plugin.metatype: com.liferay.ant.bnd.metatype.MetatypePlugin
+-plugin.resourcebundle: com.liferay.ant.bnd.resource.bundle.ResourceBundleLoaderAnalyzerPlugin
+-plugin.sass: com.liferay.ant.bnd.sass.SassAnalyzerPlugin
+-sass: *

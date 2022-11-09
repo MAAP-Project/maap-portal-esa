@@ -1,108 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.biomass</groupId>
-	<artifactId>Biomass</artifactId>
-	<packaging>pom</packaging>
+	<groupId>com.esa.maap</groupId>
+	<artifactId>maap</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Biomass</name>
+	<packaging>pom</packaging>
+	<name>maap</name>
+	<modules>
+		<module>modules</module>
+		<module>themes</module>
+	</modules>
 	<properties>
+		<liferay.workspace.bundle.url>https://releases-cdn.liferay.com/portal/7.3.2-ga3/liferay-ce-portal-tomcat-7.3.2-ga3-20200519164024819.tar.gz</liferay.workspace.bundle.url>
+		<liferay.bom.version>7.3.2</liferay.bom.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-		<!-- Permet d'avoir le bundle, le serveur tomcat et osgi pour faire fonctionner 
-			liferay -->
-		<liferay.workspace.bundle.url>
-			https://sourceforge.net/projects/lportal/files/Liferay%20Portal/7.1.0%20GA1/liferay-ce-portal-tomcat-7.1.0-ga1-20180703012531655.zip
-		</liferay.workspace.bundle.url>
-
-		<liferay.workspace.home.dir>${liferay.workspace.basedir}/bundles</liferay.workspace.home.dir>
-		<liferay.workspace.bundle.dest>${user.home}/.liferay/bundles/liferay-ce-portal-tomcat-7.0-ga3-20160804222206210.zip</liferay.workspace.bundle.dest>
-		<liferay.workspace.bundle.url>https://sourceforge.net/projects/lportal/files/Liferay%20Portal/7.1.0%20GA1/liferay-ce-portal-tomcat-7.1.0-ga1-20180703012531655.zip</liferay.workspace.bundle.url>
-		<liferay.workspace.deploy.war.dir>${liferay.workspace.home.dir}/osgi/war</liferay.workspace.deploy.war.dir>
-		<liferay.workspace.deploy.modules.dir>${liferay.workspace.home.dir}/osgi/modules</liferay.workspace.deploy.modules.dir>
-		<liferay.workspace.environment>local</liferay.workspace.environment>
 		<nexus.url.releases>https://biomass.pl.s2-eu.capgemini.com/nexus3/repository/maven-releases/</nexus.url.releases>
 		<nexus.url.snapshots>https://biomass.pl.s2-eu.capgemini.com/nexus3/repository/maven-snapshots/</nexus.url.snapshots>
 	</properties>
-
-<!-- 	<repositories> -->
-<!-- 		<repository> -->
-<!-- 			<id>liferay-public-releases</id> -->
-<!-- 			<name>Liferay public releases</name> -->
-<!-- 			<url>https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/</url> -->
-<!-- 		</repository> -->
-<!-- 		<repository> -->
-<!-- 			<id>biomass-nexus</id> -->
-<!-- 			<name>Biomass private repo on the production line</name> -->
-<!-- 			<url>https://biomass.pl.s2-eu.capgemini.com/nexus3/repository/maven-public/</url> -->
-<!-- 		</repository> -->
-<!-- 		<repository> -->
-<!-- 			<snapshots> -->
-<!-- 				<enabled>true</enabled> -->
-<!-- 			</snapshots> -->
-<!-- 			<id>nexus</id> -->
-<!-- 			<name>BIOMASS_SNAPSHOTS</name> -->
-<!-- 			<url>https://biomass.pl.s2-eu.capgemini.com/nexus3/repository/maven-snapshots/</url> -->
-<!-- 		</repository> -->
-<!-- 	</repositories> -->
-
-
-<!-- 	<pluginRepositories> -->
-<!-- 		<pluginRepository> -->
-<!-- 			<id>liferay-public-releases</id> -->
-<!-- 			<url>https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/</url> -->
-<!-- 		</pluginRepository> -->
-<!-- 		<pluginRepository> -->
-<!-- 			<id>biomass-nexus</id> -->
-<!-- 			<url>https://biomass.pl.s2-eu.capgemini.com/nexus3/repository/maven-public/</url> -->
-<!-- 		</pluginRepository> -->
-<!-- 	</pluginRepositories> -->
-
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>2.11.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.11.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>2.11.1</version>
-			<type>pom</type>
-		</dependency>
-	</dependencies>
-
-
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.liferay.portal</groupId>
+				<artifactId>release.portal.bom</artifactId>
+				<version>${liferay.bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.liferay.portal</groupId>
+				<artifactId>release.portal.bom.compile.only</artifactId>
+				<version>${liferay.bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.liferay.portal</groupId>
+				<artifactId>release.portal.bom.third.party</artifactId>
+				<version>${liferay.bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<!-- <repositories> -->
+	<!-- <repository> -->
+	<!-- <id>liferay-public</id> -->
+	<!-- <url>https://repository-cdn.liferay.com/nexus/content/groups/public/</url> -->
+	<!-- </repository> -->
+	<!-- </repositories> -->
 	<build>
 		<plugins>
-			<!-- <plugin> <groupId>com.liferay</groupId> <artifactId>com.liferay.portal.tools.bundle.support</artifactId> 
-				<version>3.2.1</version> <executions> <execution> <id>clean</id> <goals> 
-				<goal>clean</goal> </goals> <phase>clean</phase> </execution> <execution> 
-				<id>deploy</id> <goals> <goal>deploy</goal> </goals> <phase>pre-integration-test</phase> 
-				</execution> </executions> </plugin> -->
+			<plugin>
+				<groupId>com.liferay</groupId>
+				<artifactId>com.liferay.portal.tools.bundle.support</artifactId>
+				<version>3.6.0</version>
+				<executions>
+					<execution>
+						<id>clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>deploy</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-	<modules>
-		<module>sdks</module>
-		<module>portlets</module>
-		<module>themes</module>
-	</modules>
-	
 	<distributionManagement>
 		<repository>
-		  <id>releases</id>
-		  <url>${nexus.url.releases}</url>
+			<id>releases</id>
+			<url>${nexus.url.releases}</url>
 		</repository>
 		<snapshotRepository>
-		  <id>snapshots</id>
-		  <url>${nexus.url.snapshots}</url>
+			<id>snapshots</id>
+			<url>${nexus.url.snapshots}</url>
 		</snapshotRepository>
-  </distributionManagement>
+	</distributionManagement>
 </project>

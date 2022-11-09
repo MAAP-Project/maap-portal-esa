@@ -1,0 +1,14 @@
+Bundle-Name: ${project.name}
+Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
+Bundle-Version: ${project.version}
+Export-Package: com.esa.maap.data.api
+-metatype: *
+-plugin.metatype: com.liferay.ant.bnd.metatype.MetatypePlugin
+Import-Package: \
+	com.esa.maap.restclient.api,\
+	com.esa.maap.common.*,\
+	com.esa.bmap.model.*,\
+	com.esa.bmap.common.*,\
+	com.fasterxml.jackson.*,\
+	com.bedatadriven.*,\
+	org.slf4j.*;resolution:=dynamic, *

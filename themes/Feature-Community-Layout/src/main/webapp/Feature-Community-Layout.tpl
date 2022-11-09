@@ -10,15 +10,14 @@
 
 <style>
 .center {
-	margin: auto;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.17), 0 3px 10px 0 rgba(11, 0, 0, 0.2);
+	/* box-shadow: 0 2px 2px 2px rgba(0,0,0,0),0 6px 20px 0 rgba(0,0,0,0.06); */
 	border-radius: 25px;
-	margin-top: 30px;
+	margin-top: 10px;
 	text-align: left;
 	font-family: 'NotesEsaReg';
 	text-decoration: none;
-	color: black;
-	padding: 50px 50px 50px 50px;
-	margin: 50px auto;
+	color:black;
+	padding: 0px 50px 50px 50px;
+	margin: 0 50px auto;
 }
 </style>

@@ -1,0 +1,12 @@
+Bundle-Name: ${project.name}
+Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
+Bundle-Version: ${project.version}
+Export-Package: com.esa.maap.restclient.api
+-metatype: *
+-plugin.metatype: com.liferay.ant.bnd.metatype.MetatypePlugin
+Bundle-ClassPath:\
+  .,\
+  lib/commons-io.jar
+  
+-includeresource:\
+  lib/commons-io.jar=commons-io-2.0.jar

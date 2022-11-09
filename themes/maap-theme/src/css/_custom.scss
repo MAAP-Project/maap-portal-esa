@@ -1,0 +1,725 @@
+/* These inject tags are used for dynamically creating imports for themelet styles, you can place them where ever you like in this file. */
+
+/* inject:imports */
+/* endinject */
+
+/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+
+/* Colors used in the platform */
+$color-red:#FF0000;
+
+
+$color-green:#008542;
+
+
+$color-text:#008542;
+
+
+$color-blue:#00338D;
+
+$color-white:#FFFFFF;
+
+
+$color-gray-dark:#323a45;
+
+
+$color-grey-light:#D5D6D2;
+
+
+$color-grey-light2:#9A9B9C;
+
+
+$color-grey-light3:#747678;
+/******************************* Font ***************************/
+
+
+@font-face {
+	font-family: 'NotesEsaReg';
+	src: url("font-esa/RopaSans-Regular.ttf");
+	src: url("font-esa/RopaSans-Regular.ttf") format("embedded-opentype"),
+		url("font-esa/RopaSans-Regular.ttf") format("opentype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'NotesEsaBol';
+	src: url("font-esa/RopaSans-Regular.ttf");
+	src: url("font-esa/RopaSans-Regular.ttf") format("embedded-opentype"),
+		url("font-esa/RopaSans-Regular.ttf") format("opentype");
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'NotesEsaBolIta';
+	src: url("font-esa/RopaSans-Regular.ttf");
+	src: url("font-esa/RopaSans-Regular.ttf") format("embedded-opentype"),
+		url("font-esa/RopaSans-Regular.ttf") format("opentype");
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'NotesEsaRegIta';
+	src: url("font-esa/RopaSans-Regular.ttf");
+	src: url("font-esa/RopaSans-Regular.ttf") format("embedded-opentype"),
+		url("font-esa/RopaSans-Regular.ttf") format("opentype");
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Merriweather';
+	src: url("font-esa/Merriweather-Regular.ttf");
+	src: url("font-esa/Merriweather-Regular.ttf")
+		format("embedded-opentype"), url("font-esa/Merriweather-Regular.ttf")
+		format("opentype");
+	font-weight: normal;
+}
+
+/* Menu */
+.breadcrumb-link {
+    color: $color-blue;
+}
+
+.portlet-breadcrumb {
+    height: 60px;
+}
+
+/*************** Menu *****************************/
+/*---------- BODY --------------------------------*/
+#navigation a {
+	text-decoration: none;
+}
+
+/*---------- Wrapper --------------------*/
+nav {
+	width: 100%;
+}
+
+#navigation ul {
+	text-align: center;
+}
+
+#navigation ul li {
+	font-family: 'NotesEsaReg';
+	cursor: pointer;
+	-webkit-transition: padding .05s linear;
+	-moz-transition: padding .05s linear;
+	-ms-transition: padding .05s linear;
+	-o-transition: padding .05s linear;
+	transition: padding .05s linear;
+	
+	    display: inline-block;
+        position: relative;
+        line-height: 21px;
+        text-align: left;
+}
+
+#navigation ul li.drop {
+	position: relative;
+}
+
+#navigation ul>li {
+	display: inline-block;
+}
+
+#navigation ul li a {
+	padding: 0 20px;
+	height: 35px;
+	font-size: 24px;
+	color: $color-blue;
+	-webkit-transition: all .1s ease-out;
+	-moz-transition: all .1s ease-out;
+	-ms-transition: all .1s ease-out;
+	-o-transition: all .1s ease-out;
+	transition: all .1s ease-out;
+}
+
+#navigation ul li a:hover {
+    color: #eee;
+}
+
+#navigation ul li:hover ul.dropdown{
+   display: block;	/* Display the dropdown */
+}
+    
+#navigation ul li ul.dropdown li{
+   display: block;
+}
+
+#navigation .dropOut .triangle {
+	width: 0;
+	height: 0;
+	position: absolute;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	color: $color-blue;
+	font-family: 'NotesEsaReg';
+	border-bottom: 8px solid white;
+	top: -8px;
+	left: 50%;
+	margin-left: -8px;
+	border-right: none;
+}
+
+#navigation .dropdownContain {
+	width: 160px;
+	position: absolute;
+	z-index: 2;
+	left: 50%;
+	margin-left: -80px; /* half of width */
+	top: -400px;
+}
+
+#navigation .dropOut {
+	width: 160px;
+	background: white;
+	float: left;
+	position: relative;
+	margin-top: 0px;
+	opacity: 0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, .15);
+	-moz-box-shadow: 0 1px 6px rgba(0, 0, 0, .15);
+	box-shadow: 0 1px 6px rgba(0, 0, 0, .15);
+	-webkit-transition: all .1s ease-out;
+	-moz-transition: all .1s ease-out;
+	-ms-transition: all .1s ease-out;
+	-o-transition: all .1s ease-out;
+	transition: all .1s ease-out;
+}
+
+#navigation .dropOut ul {
+	float: left;
+	padding: 10px 0;
+}
+
+#navigation .dropOut ul li {
+	text-align: left;
+	float: left;
+	width: 125px;
+	padding: 12px 0 10px 15px;
+	margin: 0px 10px;
+	color: #777;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-transition: background .1s ease-out;
+	-moz-transition: background .1s ease-out;
+	-ms-transition: background .1s ease-out;
+	-o-transition: background .1s ease-out;
+	transition: background .1s ease-out;
+}
+
+#navigation .dropOut ul li:hover {
+	background: #f6f6f6;
+}
+
+#navigation ul li:hover a {
+	color: black;
+	text-decoration: none;
+}
+
+#navigation ul li:hover .dropdownContain {
+	top: 65px;
+}
+
+#navigation ul li:hover .underline {
+	border-bottom-color: #777;
+}
+
+#navigation ul li:hover .dropOut {
+	opacity: 1;
+	margin-top: 8px;
+}
+
+#navigation li {
+	border-right: 1px solid #C1C7D3;
+}
+
+#navigation li:first-child {
+	border-left: none;
+}
+
+#navigation li:last-child {
+	border-right: none;
+}
+
+#menu li:nth-last-child(1) {
+	border-right: none;
+}
+/******************Header********************/
+.logoLiferay {
+	float: left;
+	width: 257px;
+}
+
+.menuSearch {
+	float: right;
+	padding-top: 30px;
+}
+
+a#sign-in {
+	font-family: 'NotesEsaReg';
+	text-decoration: none;
+}
+
+#content {
+	clear: both;
+}
+
+.imgLogo {
+	max-width: 100%
+}
+
+/** Remove the background in portlet **/
+.portlet-decorate .portlet-content {
+	background: transparent;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 1px 1px 1px 1px;
+	word-wrap: break-word;
+}
+
+content {
+	background-color: $color-white;
+}
+
+#logoFooterEsa {
+	height: 48px;
+	margin: 5px 15px 19px 0px;
+}
+
+#logoFooterNasa {
+	height: 53px;
+	margin: 5px 0px 20px 20px;
+}
+
+.btn-primary {
+    color: #FFF;
+    background-color: #00338D;
+    border-color: #00338D;
+}
+
+.btn-default {
+	border: 1px solid #979797;
+	background-color: #008542;
+	color: white;
+}
+
+.taglib-text, .icon-plus, .icon-question-sign, .icon-signin {
+	color: #00338D;
+}
+
+/** Align div and put a border and a show. Used for login, and Blog **/
+#portlet_com_liferay_login_web_portlet_LoginPortlet {
+	box-shadow: 0 2px 2px 2px rgba(0,0,0,0),0 6px 20px 0 rgba(0,0,0,0.06);
+	border-radius: 10px;
+	margin: 0 auto;
+	margin-top: 30px;
+	text-align: left;
+	font-family: 'NotesEsaReg';
+	text-decoration: none;
+	color: $color-blue;
+}
+
+.breadcrumb {
+	background-color: transparent;
+}
+
+/*BOOTSTRAP OVERRIDE */
+/* .card-text {
+	color: $color-grey-light2;
+	font-size: 22px;
+	line-height: 34px;
+	text-align: justify;
+	font-family: 'Merriweather', serif;
+}
+
+.card-title {
+	height: 170px;
+	color: $color-gray-dark;
+}
+
+.imgText {
+	text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+
+.imgTitle {
+	text-shadow: black 0.1em 0.1em 0.2em;
+} */
+ .card-text {
+	color: $color-grey-light2;
+	font-size: 22px;
+	line-height: 34px;
+	text-align: justify;
+	font-family: 'Merriweather', serif;
+	margin-bottom: 10px !important;
+ }
+
+
+
+ .card-title {
+	height: auto;
+	color: $color-gray-dark;
+	font-family: NotesEsaReg;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 40px;
+	text-align: left;
+	margin-bottom: 30px;
+ } 
+ 
+ .read-more {	
+    height: 19px;	
+    color: $color-green;	
+    font-family: Arial;	font-size: 14px;	
+    font-weight: bold;	
+    line-height: 16px; 	
+    text-align: left;
+ }
+
+.card-line {	box-sizing: border-box;	height: 3px;	width: auto;	border: 3px solid #20AB6C;	text-align: left;}
+.card-info-template {
+   border: 1px solid transparent !important;
+   box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.0) !important;}
+
+/* Login page */
+#portlet_com_liferay_login_web_portlet_LoginPortlet {
+   width: 35%;
+}
+
+.custom-logo img {
+	height: 50px;
+	width: auto;
+	margin-top: -13px;
+}
+
+
+/* Remove title from all portlet */
+.portlet-title-text {
+   display: none;
+}
+
+/* card of blog */
+.portlet-body > .widget-mode-card > col-lg-4 {
+  box-shadow: 0 2px 2px 2px rgba(0,0,0,0),0 6px 20px 0 rgba(0,0,0,0.09);
+  padding-top: 15px;
+}
+
+.card {
+	background-color: var(--card-bg);
+	border: var(--card-border-width) solid var(--card-border-color);
+	box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.6);
+	color: var(--card-color);
+	overflow: var(--card-overflow);
+}
+
+.dropdown {
+ top: 75% !important;
+}
+
+@media only screen and (max-width: 1500px) {
+  /* For medium screens: */
+  #navigation ul li a {
+	font-size: 18px;
+  }
+  
+  .custom-logo img {
+  	width: 100%;
+  	height: 35px;
+  }
+  
+#logoFooterEsa {
+	height: 45px;
+	margin: 7px 15px 19px 0px;
+}
+
+#logoFooterNasa {
+	height: 50px;
+	margin: 5px 0px 20px 20px;
+}
+  
+  #signInImage {
+    height: 20px;
+  }
+  
+  /* card title for welcome */
+  .card-info-title {
+	height: auto;
+	color: $color-gray-dark;
+	font-family: NotesEsaReg;
+	font-size: 25px;
+	font-weight: bold;
+	line-height: 28px;
+	text-align: left;
+ }
+
+ .card-text {
+	color: $color-grey-light2;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: justify;
+	font-family: 'Merriweather', serif;
+	
+ }
+ 
+  .read-more {	
+    height: 19px;	
+    color: $color-green;	
+    font-family: Arial;	font-size: 14px;	
+    font-weight: bold;	
+    line-height: 16px; 	
+    text-align: left;
+    font-size: 10px;
+ }
+ 
+ .resume-news-card-body {
+  padding: 1rem;
+ }
+ 
+ h3, .h3 {
+    font-size: 1.3rem;
+ }
+
+}
+
+
+#navigation  .navbar-expand-md .nav-item, .navbar-expand-md .nav-underline .tab, .nav-underline .navbar-expand-md .tab, .navbar-expand-md .nav-item .dropdown, .navbar-expand-md .nav-underline .tab .dropdown, .nav-underline .navbar-expand-md .tab .dropdown {
+    align-items: center;
+    display: flex;
+}
+#navigation  .navbar-nav .nav-item, .navbar-nav .nav-underline .tab, .nav-underline .navbar-nav .tab {
+    word-wrap: normal;
+}
+
+
+
+#navigation  .dropup, .dropright, .dropdown, .dropleft {
+    position: relative;
+}
+
+#navigation  .navbar-classic .navbar-nav .nav-item:not(:last-of-type) .nav-link {
+    margin-right: 16px;
+}
+#navigation  .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-nav .nav-underline .tab a, .nav-underline .tab .navbar-light .navbar-nav a {
+    color: #6b6c7e;
+}
+#navigation  .navbar-expand-md .navbar-nav .nav-link, .navbar-expand-md .navbar-nav .nav-underline .tab a, .nav-underline .tab .navbar-expand-md .navbar-nav a {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+#navigation  .nav-link:not(.disabled) {
+    color: var(--nav-link-color);
+    padding: var(--nav-link-padding-y) var(--nav-link-padding-x);
+}
+#navigation  .navbar-classic .nav-link {
+    color: #6b6c7e;
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+#navigation  .text-truncate {
+    display: block;
+}
+#navigation  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+#navigation  .dropdown-item, .dropdown-menu > li > a, .dropdown-menu .link-list > li > a {
+    border-radius: 0;
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.5rem;
+    position: relative;
+    transition: none;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    font-size: inherit;
+}
+#navigation  .dropdown-item, .dropdown-menu > li > a, .dropdown-menu .link-list > li > a {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1.25rem;
+    clear: both;
+    font-weight: 400;
+    color: #6b6c7e;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+a {
+    color: #0b5fff;
+    text-decoration: none;
+    background-color: transparent;
+    }
+    
+#navigation .dropdown-menu {
+    border: 1px solid #e7e7ed;
+    top: 80%;
+}
+#navigation .dropdown-menu {
+    font-size: 0.875rem;
+    max-height: 500px;
+    max-width: 240px;
+    min-height: 40px;
+    overflow: auto;
+    padding-bottom: 0;
+}
+
+#navigation .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 240px;
+    padding: 0.375rem 0;
+        padding-bottom: 0.375rem;
+    margin: 0.3125rem 0 0;
+    font-size: 0.875rem;
+    color: #272833;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 0 solid #e7e7ed;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.3);
+    
+}
+
+#navigation  .navbar-classic .navbar-nav .nav-item:not(:last-of-type) .nav-link {
+    margin-right: 16px;
+}
+#navigation  .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-nav .nav-underline .tab a, .nav-underline .tab .navbar-light .navbar-nav a {
+    color: #6b6c7e;
+}
+#navigation  .navbar-expand-md .navbar-nav .nav-link, .navbar-expand-md .navbar-nav .nav-underline .tab a, .nav-underline .tab .navbar-expand-md .navbar-nav a {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+#navigation  .nav-link:not(.disabled) {
+    color: var(--nav-link-color);
+    padding: var(--nav-link-padding-y) var(--nav-link-padding-x);
+}
+#navigation  .navbar-classic .nav-link {
+    color: #6b6c7e;
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+#navigation  .navbar-nav .nav-item.hover::after {
+    bottom: -0.3125rem;
+    content: '';
+    height: 0.3125rem;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+#navigation .dropdown-item:active, .dropdown-menu > li > a:active, .dropdown-menu .link-list > li > a:active {
+    color: #FFF;
+    text-decoration: none;
+    background-color: none;
+}
+
+.dropdown-menu {
+height: auto !important;
+}
+
+.scheduler-base-hd .scheduler-base-views button {
+    color: white;
+}
+
+.maap-border {
+
+    box-shadow: 0 2px 2px 2px rgba(0,0,0,0),0 6px 20px 0 rgba(0,0,0,0.06);
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-family: 'NotesEsaReg';
+    text-decoration: none;
+    color: black;
+    padding: 50px 50px 50px 50px;
+    margin: 50px auto;
+    border: 1px solid #0098DB;
+}
+
+/*card for news*/
+.widget-mode-card .card {
+	background-color: var(--card-bg);
+	box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.6);
+	color: var(--card-color);
+	overflow: var(--card-overflow);
+	border: 1px solid #0098DB;
+}
+
+/* css for user personal menu */
+#p_p_id_com_liferay_product_navigation_user_personal_bar_web_portlet_ProductNavigationUserPersonalBarPortlet_{
+
+	/*width: 40px !important;*/
+	float: right;
+	margin-top: -25px;
+
+}
+
+.flags > .taglib-flags > button {
+	color: white;
+
+}
+
+.portlet .visible-interaction {
+	display: block;	
+}
+
+/* put share button inline */
+.taglib-social-bookmarks {
+    display: block;
+}
+
+#footer {
+ bottom: 0;
+ position: inherit;
+ width: inherit;
+}
+
+/** footer text */
+  .footer-text {
+	height: auto;
+	color: $color-gray-dark;
+	font-family: NotesEsaReg;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 28px;
+	text-align: center;
+ }
+ 
+ /* News */
+.input-container > .widget-mode-detail > .aspect-ratio {
+ 	padding-bottom: 32%;
+ }
+ 
+/* Blog mode */
+.input-container > .widget-mode-detail > .aspect-ratio-bg-cover  {
+ 	padding-bottom: 40%;
+ 	background-size: contain;
+ }
+ 
+.autofit-col-end > .dropdown {
+    top: 0 !important;
+ }
