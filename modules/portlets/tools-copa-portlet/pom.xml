@@ -18,7 +18,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>-->
 			<properties>
-				<liferay.bom.version>7.3.2</liferay.bom.version>
+				<liferay.bom.version>7.4.3.37</liferay.bom.version>
 			</properties>
 			<dependencyManagement>
 				<dependencies>
