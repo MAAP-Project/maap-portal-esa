@@ -1,9 +1,0 @@
-Bundle-Name: ${project.name}
-Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
-Bundle-Version: ${project.version}
-Export-Package: com.esa.bmap.model.*, \
-				com.esa.bmap.common.*, \
-				com.vividsolutions.*, \
-				com.fasterxml.jackson.*, \
-				com.bedatadriven.*			
-Import-Package: *;resolution:=optional 
