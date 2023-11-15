@@ -1,0 +1,6 @@
+<div class="news-list">
+  <maap-esa-portal-news-item
+    [newsItem]="newsItem"
+    *ngFor="let newsItem of newsList | async"
+  ></maap-esa-portal-news-item>
+</div>

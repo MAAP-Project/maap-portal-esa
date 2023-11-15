@@ -1,0 +1,70 @@
+= Use mount S3 menu
+:author: Camille Clavié
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/antora/eclipse-che/mount-s3
+:revdate: August, 16 2022
+
+== S3 drive processing with Jupyter workspace
+
+=== Procedure for using the new S3 mount on a workspace
+
+When creating a new workspace or restarting an existing workspace, a menu with the contents of the S3 data is displayed.
+
+image::{imagesprefix}/S3WorkspaceMenu.png[]
+
+All catalog data is stored in a folder :
+
+image::{imagesprefix}/S3Catalogue.png[]
+
+In the catalog-data folder, two sub-folders appear: *Campaign_data* with data by campaign :
+
+* biosar,
+* afrisar,
+* tropisar,
+* user data,
+* etc.
+
+image::{imagesprefix}/S3CampaignDataContent.png[]
+
+And another sub-folder with esacci data.
+
+In the S3 drive, there is also the *user-data* folder where user data are listed by theme :
+
+* biopal,
+* SARSIM,
+* Brix2,
+* etc.
+
+image::{imagesprefix}/S3UserDataContent.png[]
+
+These data are hosted on the platform and mounted as *read-only*:
+it can be accessed with linux commands (because the S3 drive is a linux mount) and the data can be viewed by downloading it.
+For this purpose a dedicated notebook with the main commands as input *(path S3 drive)* has been created (present in the following directory : *_/demo-scripts/mmap-S3/script-s3_stream_direct.ipynb_*).
+
+Open directly the notebook and choose the data (the associated path to be informed in input), it is then enough to launch the various commands according to the needs for use.
+
+.Different S3 commands to use data in the directory
+|===
+|Command |Role
+
+|_!ls -sh /s3-drive path/*.tiff_
+|list the data and view their size
+
+|_!time gdalinfo s3-drive path/*.tiff_
+|get the information associated to the selected data
+
+|_!mkdir /folder name/_
+|create a new folder to copy the data you want to retrieve
+
+|_!time cp s3-drive path/*.tiff /folder name/._
+|copy a data in the file previously created
+
+|_procedure compute data_
+|to display data and replace maap-s3 download script
+|===
+
+image::{imagesprefix}/DedicatedS3ScriptNotebook.png[]
+
+It allows to launch linux commands to list the selected data in the catalog or listed user data, to consult the content of these data and to copy them locally or just consult them from internet.
+The data download is now done with the S3 mount, no need to run the "download" of the notebook maap s3 script, you can choose to display any data directly from your workspace.
+
+WARNING: The usage of the cache is limited to the files lower than 2.5GB.

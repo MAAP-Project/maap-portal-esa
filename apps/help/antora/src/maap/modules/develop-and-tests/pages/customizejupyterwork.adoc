@@ -1,0 +1,42 @@
+= Customize and Manage Jupyter workspace
+:author: Camille Clavié
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/antora/eclipse-che/mount-s3
+
+== Installing custom libraries
+
+The MAAP platform provide a Jupyter environment integrated in the Eclipse che and a Theia environment which is a visual studio code editor.
+
+The platform allows developers to install their own librairies. But in order to have the persistence, developers must be carefully during the creation of the workspace.
+
+In order to install librairies you want, please follow carefully the documentation below:
+
+. Login in the Maap platform using the credentials provided by the ESA Team.
+. Create a Jupyter workspace by clicking on Jupyter under Get started
+. Wait until the workspace is initiated
+. Once you have a Jupyter workspace, click on the terminal
+. Once the conda environement is initiated, it is closed automatically
+. Please, click once again on the Terminal. Wait 3 seconds. Then you will see a message workspace is ready
+. Now you can install additionnal conda or python package
+
+
+
+== Saving customisation
+
+It is possibile to save the current state of the conda environment so that every additional package will still be available when restarting or creating a new workspace.
+
+In a Terminal, enter the following command lines :
+
+[source,]
+--
+cd
+tar zcf my-private-bucket/conda.tar.gz .conda .bash_profile .condarc
+--
+
+To use the MAAP default conda environment instead of a customised one, remove (or rename) the existing back-up
+
+[source,]
+--
+cd
+rm my-private-bucket/conda.tar.gz
+--
+

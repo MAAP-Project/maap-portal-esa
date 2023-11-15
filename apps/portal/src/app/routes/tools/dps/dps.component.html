@@ -1,0 +1,85 @@
+<div class="container" *ngIf="processes$ | async as processes">
+    <h1>Launch process</h1>
+    <button routerLink="/tools/Deployment" class="launch-process-button redirect cursor-button">Manage process</button>
+
+    <nav class="navbar navbar-light ">
+        <p-autoComplete placeholder="Search for an algorithm" [showEmptyMessage]="true" [(ngModel)]="selectedAlgos"
+            [suggestions]="filtredAlgos" (completeMethod)="filterAlgo($event, processes)" (onSelect)="onSelect($event)"
+            (onBlur)="onUnselect($event)" [dropdown]="true" [style]="{width: '40vw'}" field="title">
+            <ng-template let-algo pTemplate="item">
+                <div class="item">
+                    <span> {{algo.title}} </span>
+                </div>
+            </ng-template>
+        </p-autoComplete>
+
+    </nav>
+
+    <div class="launch-container">
+        <a class="launch-process-card" *ngIf="selectedAlgo">
+            <div class="card-body">
+                <h3 class="title-algo">
+                    <b>{{selectedAlgo.title}} </b>
+                    <span class="info">
+                        <i class="pi pi-info-circle" [pTooltip]=selectedAlgo.abstract></i>
+                    </span>
+                </h3>
+
+                <span *ngIf="inputs">
+                    <p> Parameter : </p>
+                    <table>
+                        <tr *ngFor="let val of parameters; index as i">
+                            <th>
+                                <span>
+                                    {{val.label}}
+                                    <i class="pi pi-question-circle" [pTooltip]=val.abstract></i>
+                                </span>
+                            </th>
+                            <th>
+                                <input type="text" pInputText class="input-path" [(ngModel)]=data[i]>
+                            </th>
+                        </tr>
+
+                    </table>
+                </span>
+                <div class="container-input" *ngIf="input_data">
+                    <span class="addurls" (click)="addUrl()">
+                        <p> Add input data</p>
+                        <i class="pi pi-plus-circle icon-add"></i>
+                    </span>
+                    <table id="input">
+                        <tr>
+                            <th style="width: 24.5rem;">
+                                <span>
+                                    {{input_data.label}}
+                                    <i class="pi pi-question-circle" [pTooltip]=input_data.abstract></i>
+                                </span>
+                            </th>
+                            <th>
+                                <div *ngFor="let url of urls; index as i; trackBy: trackByFn;">
+                                    <input type="text" pInputText [(ngModel)]="urls[i]" class="input-url" />
+                                    <i class="pi pi-times icon-delete " (click)="deleteUrl(i)"></i>
+                                </div>
+                            </th>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+                <br>
+                <button
+                    [ngClass]="isProcessRunning? 'disabled-button launch-process-button cursor-button':'launch-process-button cursor-button' "
+                    (click)="ExecuteWorkflow(selectedAlgo)" [disabled]="isProcessRunning">Run
+                    workflow</button>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+
+<div *ngIf="argoUrl$ | async as argoUrl">
+    <iframe [frameBorder]="0" [src]="argoUrl | safe" [height]="iframeHeight" width="100%"></iframe>
+</div>

@@ -1,0 +1,8 @@
+.Develop and test
+* xref:index.adoc[]
+* xref:createworkspace.adoc[]
+** xref:stackeclipse.adoc[]
+** xref:customizejupyterwork.adoc[]
+** xref:addpythonlibraries.adoc[]
+** xref:uploadlargedata.adoc[]
+* xref:cwlhowto.adoc[]

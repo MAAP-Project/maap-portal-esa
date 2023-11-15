@@ -1,0 +1,14 @@
+site:
+  title: MAAP Docs
+  start_page: maap::index.adoc
+content:
+  sources:
+  - url: ./src/maap
+ui:
+  bundle:
+    url: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/antora/ui-bundle.zip
+    snapshot: true
+  supplemental_files: ./supplemental-ui
+antora:
+  extensions:
+  - '@antora/lunr-extension'

@@ -1,0 +1,14 @@
+== POLINSAR and BIOMASS 2023
+:author: Maap
+:revdate: June, 19 2023
+:article-background-url: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-common/news/assets/ESA_polsar.jpg
+:description: POLINSAR and BIOMASS 2023
+
+
+During the 11th International Workshop on Science and Applications of SAR Polarimetry and Polarimetric Interferometry and BIOMASS Workshop, the MAAP will be presented to the PolINSAR and BIOMASS communities. +
+Participants to this workshop will have the chance to witness live demonstrations of the MAAP. +
+
+.MAAP Poster
+image::https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-common/news/assets/7polsar/maap_poster.jpg[]
+
+More information at: https://polinsar-biomass2023.esa.int/

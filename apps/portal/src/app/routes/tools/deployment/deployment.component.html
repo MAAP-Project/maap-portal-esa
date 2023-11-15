@@ -1,0 +1,28 @@
+<h1>Manage process</h1>
+
+<div class="container-deploy">
+    <div class="container">
+        <h2>Deploy process</h2>
+        <input type="text" pInputText class="executionUnit" [(ngModel)]="executionUnit">
+        <button (click)="deploy(executionUnit)">Deploy</button>
+    </div>
+    <div class="container" *ngIf="processes$ | async as processes">
+        <h2>Undeploy process</h2>
+
+        <p-autoComplete placeholder="Deployed processes" [showEmptyMessage]="true" [(ngModel)]="deployedProcess"
+            (onSelect)="onSelect($event)" [suggestions]="filteredProcess"
+            (completeMethod)="filterProcesses($event,processes)" [dropdown]="true" [style]="{width: '33vw'}"
+            class="search" field="title">
+
+            <ng-template let-item pTemplate="item">
+                <div class="item">
+                    <span>{{item.id}} : {{item.title}}</span>
+                </div>
+            </ng-template>
+        </p-autoComplete>
+
+        <button (click)="undeploy(deployedProcess.id)">Undeploy</button>
+    </div>
+</div>
+
+<p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>

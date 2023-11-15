@@ -1,0 +1,37 @@
+= How to download a subset data from the MAAP front-end ?
+
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/faq/faq1
+:revdate: August, 12 2022
+
+It's possible to download a subset data from Eclipse Che in a jupyter notebook and from Copa.
+
+== Download from Eclipse Che
+
+* Follow the next procedure to create your workspace : *Eclipse CHE > Create New Workspace > Manage Jupyter workspace*
+* Open your workspace in Eclipse Che and clone the Demo-scripts repository : _git clone https://repo.uat.maap-project.org/esa-common/demo-scripts.git_
+* Open the notebook */demo-scripts/edav/edav_make_subset_from_catalog_data.ipynb*
+
+=== Explore Part
+
+Go on the MAAP front-end choose your catalog and dataset and add it on maap,
+if the dataset is *ESACCI_Biomass_L4_AGB* you can directly select your subset because it's global data, otherwise you have firstly to zoom to dataset are. Then, follow the next procedure :
+
+image::{imagesprefix}/image1.png[]
+
+image::{imagesprefix}/image2.png[]
+
+image::{imagesprefix}/image3.png[]
+
+== Go back to Eclipse Che workspace, use Notebook
+
+After that paste the url in the notebook *edav_make_subset_from_catalog_data.ipynb* in the data variable data :
+
+image::{imagesprefix}/image4.png[]
+
+Then you can run the next cells to download and visualize you subset data
+
+== Download from COPA
+
+If you want to use copa you have to make a workflow with also an algorithm wich will transfer you data on s3 storage to be able to retrieve it.
+
+Follow the procedue described in the next help page : *COPA > Use COPA interface*

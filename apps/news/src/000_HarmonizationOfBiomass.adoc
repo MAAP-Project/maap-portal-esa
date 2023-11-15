@@ -1,0 +1,47 @@
+= Harmonization of the Biomass map on a given region
+:author: Camille Clavié
+:revdate: August, 17 2022
+:article-background-url: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/news/christinas-experience/HeaderArticle1.jpg
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/news/christinas-experience
+:description: research work by Christina Topali
+
+Presentation of Biomass harmonization work and algorithmic results through the use of MAAP
+
+== Introduction
+
+In this article we will discuss the results of studies obtained during Christina Topali's internship on the harmonization of the Biomass in the region of Mexico. These results validate the AGB images that are derived from the algorithms to make a comparison of the workflow of this aerial biomass. These different algorithms are developed by the NASA teams that it has managed to make work on the MAAP ESA. To obtain the results below, Christina used in a professional way the different tools available on MAAP.
+
+=== Step in the process of his work
+
+====
+Copa is an orchestration tool with ready-to-use processing algorithms. Users are able to orchestrate a workflow using these algorithms, which will perform the processing of their choice while retrieving products and data already uploaded to MAAP.
+====
+
+She was able to execute algorithm sequences thanks to the COPA orchestrator and was able to play different notebooks on her Jupyter workspace and visualize her results which she then pushed into the dedicated S3 storage.
+
+[quote, Christina Topali, feedback on using the scripts and notebooks made available to her]
+____
+I could easily find my way around the Gitlab repository connected directly to the MAAP platform and I was able to clone all the files and scripts needed to run it easily.
+In the same way, any user, whether familiar with coding or not, can find many notebooks with different use cases and either use them as is or prototype them to suit their needs.
+____
+
+Here is the link to the Gitlab repository where the project Christina used for this research is located: https://repo.ops.maap-project.org/arnanaraza/PlotToMap1
+
+== Interpretation results of his work
+
+his work was mainly focused on the region of Mexico here are his validation results after playing the associated *Plot2Map* notebooks:
+
+.The aerial biomass in the country of Mexico and the standard deviation for the same map
+image::{imagesprefix}/plot2map1.png[]
+
+.The height of the vegetation and the percentage of forest cover
+image::{imagesprefix}/plot2map2.png[]
+
+.The biome classes with an explanatory table
+image::{imagesprefix}/plot2map3.png[]
+
+This project is accessible to authenticated users on the MAAP, you can retrieve these use cases and adapt them to your own needs or simply use them as they are to obtain usable results and a better understanding of the tools at your disposal.
+
+Good work!
+
+

@@ -1,0 +1,13 @@
+<div class="user-guides">
+  <h1 class="title">User Guides</h1>
+  <h2 class="section-title">FAQ</h2>
+  <ul class="faq-list">
+    <li class="faq-item" *ngFor="let faqItem of faqList | async">
+      <a routerLink="/help/user-guides/faq/{{ faqItem.id }}">{{
+        faqItem.title
+      }}</a>
+    </li>
+  </ul>
+  <h2 class="section-title">Documentation</h2>
+  <a target="_blank" href="./docs/index.html">{{ documentationUrl }}</a>
+</div>

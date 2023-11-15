@@ -1,0 +1,70 @@
+= API's management
+:author: Herman Tatani
+:revdate: October, 18 2022
+
+== Introduction
+
+====
+The MAAP platform is composed of many APIs (Application Programming Interface) which are use to exchange data with other components of the system.
+====
+
+== MAAP APIs
+
+=== s3 API
+
+This API is used for operations related to accessing objects stored on s3 bucket (ESA campaign data, CCI data and other data/datasets).
+
+==== s3 API operations
+
+* *GET* : this operation allows to download or copy a file from a s3 bucket to a user workspace.
+* *PUT* : this oparation allows to put or copy a file from a local destination on my workspace to a s3 bucket.
+* *DELETE* : this operation allows to delete a file with a given URL on S3 bucket.
+
+=== WPS API
+
+This API provides access to pre-defined processes and job control operations that can instantiate, control and monitor processing jobs.
+
+==== WPS API operations
+
+* *GetCapabilities* : this operation is used to retrieve service metadata, basic process offerings, and the available processes present on a WPS server.
+* *DescribeProcess* : this operation is used to get the description of a given process (list of input and output parameters).
+* *Execute* : this operation allows to execute a process, entering possible input and output data/parameter.
+* *GetStatus* : this operation is used to query the status of an asynchronously executed job 
+* *GetResults* : this operation is used to query the result of a finished processing job
+* *Dismiss* : this operation is used to delete a job and the result associate to it.
+
+=== WPST API
+
+This API provides operations to deploy processes as workflows and manage and execute those workflows
+
+==== WPST API operations
+
+* *DeployProcess* : this operation is used to deploy a process described in a CWL workflow on the cluster
+* *UndeployProcess* : this operation is used to remove a process and its executions from the cluster
+* *DescribeProcess* : this operation is used to get the description of a given process (list of input and output parameters)
+* *ListProcesses* : this operation returns the list of deployed processes on the cluster
+* *ExecuteProcess* : this operation allows to execute a process, entering possible input and output data/parameter.
+* *GetJobStatus* : this operation is used to query the status of an asynchronously executed job
+* *GetResults* : this operation is used to query the result of a finished processing job
+* *ListJobs* : this operation returns the list of executions for a process
+* *DismissJob* : this operation is used to delete a job from the cluster
+* *MonitorProcesses* : this operation returns monitoring informations about executed processes
+
+=== WCS API
+
+This API exposes operations to retrieve or query geographic coverages.
+
+==== WCS API operations
+
+* *GetCapabilities* : this operation is used to retrieve metadata about the service, including supported operations and parameters, and a list of the available coverages.
+* *GetCoverageId* : this operation is used to get the description of the request coverage.
+* *GetCoverage* : this operation is to get the description of the request coverage.
+
+=== OpenSearch API
+
+This API is used to search data in a generic catalog.
+
+==== OpenSearch API operations
+
+* *datasets* : this operation allows to get dataset by id and subdataset by id .
+* *search* : this operation allows to get products or granules.

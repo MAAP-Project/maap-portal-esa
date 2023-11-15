@@ -1,0 +1,19 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/news/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@maap-esa-portal/plugins-news:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/news",
+        "srcDirectory": "apps/news/src"
+      },
+      "configurations": {}
+    }
+  },
+  "tags": []
+}

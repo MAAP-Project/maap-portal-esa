@@ -1,0 +1,12 @@
+= Maap upgrade for V3D2
+:author: Maap
+:revdate: April, 10 2023
+:article-background-url: https://portal.val.esa-maap.org/portal-val/ESA/assets/HP-image.jpg
+:description: Maap upgrade for V3D2
+
+
+== *A new version of the Platform has been released !*
+
+*Notable updates in this release:*::
+* Implementation of WPS-T server for processing interoperability, including a simplified user interface to launch and algorithm executions.
+* Adding processing capability on CREODIAS, with access to its catalogue.

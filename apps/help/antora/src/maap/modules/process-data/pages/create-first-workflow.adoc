@@ -1,0 +1,91 @@
+= Example : I create my first workflow step by step
+:author: Camille Clavié
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/antora/copa/algorithms/startcopa
+:revdate: August, 05 2022
+
+
+== Introduction
+
+With COPA you can create Workflows which are composed of a series of processes that may occur sequentially, in parallel, with specified dependencies to enable one step to be executed after another, or a mixture of both.
+
+== Initial procedure
+
+.Pre-requisites :
+log in to the MAAP platform with your credentials
+
+. Once logged, click on Tools in the menu, then click on Orchestrator. A new window is opened.
++
+To create a workflow, click on create a new diagram at the bottom middle of the page
++
+*_Use case_* : I want to download subset data from edav front-end and upload this data to s3
++
+image::{imagesprefix}/image1.png[]
++
+. To see available algorithms you can click on the search bar Fin and Algorithm and then on the magnifying glass
++
+image::{imagesprefix}/image2.png[]
++
+. Then if you click on start
++
+image::{imagesprefix}/image3.png[]
+
+. Click on append task icon
++
+image::{imagesprefix}/image4.png[]
++
+Then the block will appear
++
+image::{imagesprefix}/image5.png[]
++
+. To add an algorithm in the task search your algorithm, click in the task block and then on the algorithm
++
+image::{imagesprefix}/image6.png[]
++
+Then your algorithm will be displayed in the block
++
+image::{imagesprefix}/image7.png[]
++
+. To add onother algorithm depending on your workflow use case tou can click on the task block and add another one with another algorithm with the same process *(NB: the name of the algorithm to transfer data on s3 is now "transfer-from-copa-s3" and not s3-transfer as you can see on the screens below)*.
++
+image::{imagesprefix}/image8.png[]
+
+. Then at the end of your workflow add click on the Append EndEvent block
++
+image::{imagesprefix}/image9.png[]
+
+. Once it’s done fill the name of the worflow which must be in lowercase without special caracters and click on save to save the workflow.
++
+image::{imagesprefix}/image10.png[]
+
+. Then this page will appears, click on validate Run Workflow
++
+image::{imagesprefix}/image11.png[]
+
+. Algorithms configuration
+
+.. Subset-data configuration :
++
+image::{imagesprefix}/image12.png[]
++
+.. Go on the MAAP front-end select your subset on dataset and paste Url in the subsetData parameter, then set the name of your subset in the filename parameter
++
+image::{imagesprefix}/image13.png[]
++
+.. S3-transfer configuration :
++
+image::{imagesprefix}/image14.png[]
++
+*_Focus on value_* : *maap-scientific-data/shared/TOBE_COMPLETED*
++
+If you want to save your data on s3 complete the s3 destination parameter :
++
+_Example : maap-scientific-data/shared/myname/subsetdata_
++
+TIP: if you don’t complete the pathor if you replace the beginning of the path _“maap-scientific-data/shared”_ you will not be able to download data. Your path must start with _maap-scientific-data/shared/_.
++
+. Finally click on Valide and Run to run the workflow
++
+image::{imagesprefix}/image15.png[]
+
+. If you want to download your data you can use the maap-s3 script In jupyter or on your laptop
+Notebook : https://repo.uat.maap-project.org/esa-common/demo-scripts/-/blob/master/maap-s3/maap-s3.ipynb

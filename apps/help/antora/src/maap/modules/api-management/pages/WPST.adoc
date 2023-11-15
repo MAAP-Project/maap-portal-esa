@@ -1,0 +1,435 @@
+= WPST API
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/antora/eclipse-che/cwl
+
+
+== Introduction
+
+WPST API allows users to deploy workflows from CWL files and manage them
+
+
+== WPST services
+
+WPST API offers different services :
+
+* deploy a CWL algo workflow on the cluster (via COPA orchestrator and ARGO workflow manager)
+* undeploy an algo workflow and all its executions
+* list the CWL algo workflows deployed on the cluster
+* describe a CWL algo workflow
+* execute a CWL algo workflow
+* list the executions for a CWL algo workflow
+* get the status of an execution
+* get the results of an execution
+* delete an execution on the cluster
+* monitor executed processes
+
+
+== Deploy an algo CWL
+
+post <copa-url>/wpst/processes
+
+See CWL How To for information on how to create a CWL
+Deploy service expects the URL of the CWL file as input. The file must be accessible for download by COPA server.
+
+example payload :
+[source,json]
+----
+{
+  "executionUnit": [
+    {
+        "href": "https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/cwl/echo-test/workflow.cwl"
+    }
+  ]
+}
+----
+
+example response :
+[source,json]
+----
+{
+  "processSummary": {
+    "id": "642edae449db2b027596ee2f",
+    "title": "wf-echo-test",
+    "keywords": null,
+    "owsContext": null,
+    "metadata": null,
+    "additionalParameters": null,
+    "links": null,
+    "version": null,
+    "jobControlOptions": null,
+    "outputTransmission": null,
+    "processDescriptionURL": "https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/cwl/echo-test/workflow.cwl",
+    "abstract": "Applies s expressions to EO acquisitions"
+  }
+}
+----
+
+* id is the id of the newly created workflow
+* title is the name of the workflow created on the cluster (wf- + id given in CWL workflow)
+* abstract is a description of the algo (doc given in CWL workflow)
+* processDescriptionURL is the CWL URL
+
+
+== Undeploy a workflow and delete its executions
+
+delete <copa-url>/wpst/processes/\{id}
+
+Undeploy service expects the id of the workflow to undeploy. This id is returned by deployment service in the field processSummary/id or by deployment list service (processes/id)
+
+
+== List workflows
+
+get <copa-url>/wpst/processes
+
+List all CWL workflows deployed on cluster
+
+example response :
+[source,json]
+----
+{
+  "processes": [
+    {
+      "id": "642ed43649db2b027596ee2e",
+      "title": "wf-s1tiling-demo",
+      "keywords": null,
+      "owsContext": null,
+      "metadata": null,
+      "additionalParameters": null,
+      "links": null,
+      "version": null,
+      "jobControlOptions": null,
+      "outputTransmission": null,
+      "processDescriptionURL": "https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/cwl/s1-tiling-demo/workflow.cwl",
+      "abstract": "Launch S1-Tiling Algorithm"
+    },
+    {
+      "id": "642edae449db2b027596ee2f",
+      "title": "wf-echo-test",
+      "keywords": null,
+      "owsContext": null,
+      "metadata": null,
+      "additionalParameters": null,
+      "links": null,
+      "version": null,
+      "jobControlOptions": null,
+      "outputTransmission": null,
+      "processDescriptionURL": "https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/cwl/echo-test/workflow.cwl",
+      "abstract": "Applies s expressions to EO acquisitions"
+    }
+  ]
+}
+----
+
+* id is the id of the workflow
+* title is the name of the workflow on the cluster (wf- + id given in CWL workflow)
+* processDescriptionURL is the CWL URL
+* abstract is a description of the algo (doc given in CWL workflow)
+
+
+== Describe a workflow
+
+get <copa-url>/wpst/processes/\{id}
+
+Describe service expects the id of the workflow to describe. This id is returned by deployment service in the field processSummary/id or by deployment list service (processes/id)
+
+example response :
+[source,json]
+----
+{
+  "process": {
+    "id": "642ee937e244b2362522da65",
+    "title": "wf-echo-test",
+    "keywords": null,
+    "owsContext": null,
+    "metadata": null,
+    "additionalParameters": null,
+    "links": null,
+    "inputs": [
+      {
+        "id": "input_reference",
+        "title": "Input product reference",
+        "keywords": [
+          "default: https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_36RTT_20191205_0_L2A"
+        ],
+        "owsContext": null,
+        "metadata": null,
+        "additionalParameters": null,
+        "links": null,
+        "minOccurs": null,
+        "maxOccurs": null,
+        "formats": [
+          {
+            "mimeType": "string[]",
+            "schema": null,
+            "encoding": null,
+            "maximumMegabytes": null,
+            "default": false
+          }
+        ],
+        "abstract": "Input product reference"
+      },
+      {
+        "id": "s_expression",
+        "title": "s expression",
+        "keywords": [
+          "default: (/ (- B05 B02) (+ B05 B02))"
+        ],
+        "owsContext": null,
+        "metadata": null,
+        "additionalParameters": null,
+        "links": null,
+        "minOccurs": null,
+        "maxOccurs": null,
+        "formats": [
+          {
+            "mimeType": "string[]",
+            "schema": null,
+            "encoding": null,
+            "maximumMegabytes": null,
+            "default": false
+          }
+        ],
+        "abstract": "s expression"
+      },
+      {
+        "id": "cbn",
+        "title": "cbn",
+        "keywords": [
+          "default: nbr"
+        ],
+        "owsContext": null,
+        "metadata": null,
+        "additionalParameters": null,
+        "links": null,
+        "minOccurs": null,
+        "maxOccurs": null,
+        "formats": [
+          {
+            "mimeType": "string[]",
+            "schema": null,
+            "encoding": null,
+            "maximumMegabytes": null,
+            "default": false
+          }
+        ],
+        "abstract": "cbn"
+      }
+    ],
+    "outputs": null,
+    "executeEndpoint": null,
+    "abstract": "Applies s expressions to EO acquisitions"
+  },
+  "processVersion": null,
+  "jobControlOptions": null,
+  "outputTransmission": null
+}
+----
+
+* id is the id of the workflow
+* title is the name of the workflow created on the cluster (wf- + id given in CWL workflow)
+* abstract is a description of the algo (doc given in CWL workflow)
+* inputs/id is the name of the input parameter (from CWL workflow)
+* inputs/title is the label of the input parameter (label given in CWL workflow input)
+* inputs/keywords/default is the default value for the input (default in CWL workflow input)
+* inputs/abstract is the description of the input parameter (doc in workflow input)
+* inputs/formats/mimeType is the type of the input parameter (type in workflow input)
+
+
+== Execute a workflow
+
+post <copa-url>/wpst/processes/\{id}/jobs
+
+Execute workflow service expects the id of the workflow to execute. This id is returned by deployment service in the field processSummary/id or by deployment list service (processes/id)
+
+Workflow inputs, as returned by the describe workflow service, must be valued in the execution payload
+
+example payload :
+[source,json]
+----
+{
+  "inputs": [
+    {
+      "id": "input_reference",
+      "data": "",
+      "href": "[\"url_1\",\"url_2\"]"
+    },
+    {
+      "id": "s_expression",
+      "data": "toto",
+      "href": ""
+    },
+    {
+      "id": "cbn",
+      "data": "tata",
+      "href": ""
+    },
+    {
+      "id": "copy_dir_or_file",
+      "data": "file",
+      "href": ""
+    },
+    {
+      "id": "s3_destination",
+      "data": "toto/titi/tata",
+      "href": ""
+    }
+  ],
+  "outputs": [],
+  "mode": "ASYNC",
+  "response": "RAW"
+}
+----
+
+* input data URL needs to be passed as href attribute
+* other input values should be passed as data attributes (though passing them as href will work)
+* mode must be ASYNC or SYNC (in all caps)
+* response must be RAW or DOCUMENT (in all caps)
+
+example response :
+[source,json]
+----
+{
+  "jobId": "64300c1c32f5592f42203905",
+  "status": "ACCEPTED",
+  "message": "https://argo.dev.esa-maap.org/workflows/argo/exec-wf-s1tiling-demo-2023-04-07-12-27-08-wpst",
+  "progress": null
+}
+----
+
+* jobId is the id of the execution
+* status is the status of the execution (ACCEPTED, RUNNING, SUCCEEDED or FAILED)
+* message contains the URL of the execution on argo workflows (for display in GUI)
+
+
+== List workflow executions
+
+get <copa-url>/wpst/processes/\{id}/jobs
+
+List executions service expects the id of the workflow for which to list the executions. This id is returned by deployment service in the field processSummary/id or by deployment list service (processes/id)
+
+It returns a list of execution ids
+
+example response :
+[source,json]
+----
+{
+  "jobs": [
+    "64300c1c32f5592f42203905"
+  ]
+}
+----
+
+
+== Get execution status
+
+get <copa-url>/wpst/processes/\{id}/jobs/\{jobId}
+
+Get execution status service expects the id of the workflow and the id of its execution. This workflow id is returned by deployment service in the processSummary/id field or by deployment list service (processes/id). The execution id is returned by the execute workflow service in the jobId field or by the list executions service
+
+The response is identical to the execute workflow service response
+
+example response :
+[source,json]
+----
+{
+  "jobId": "64300c1c32f5592f42203905",
+  "status": "RUNNING",
+  "message": "https://argo.dev.esa-maap.org/workflows/argo/exec-wf-s1tiling-demo-2023-04-07-12-27-08-wpst",
+  "progress": null
+}
+----
+
+
+== Get execution result
+
+get <copa-url>/wpst/processes/\{id}/jobs/\{jobId}/result
+
+Get execution results service expects the id of the workflow and the id of its execution. This workflow id is returned by deployment service in the processSummary/id field or by deployment list service (processes/id). The execution id is returned by the execute workflow service in the jobId field or by the list executions service.
+
+If the execution is not successful or finished, an error is returned
+
+The response returns pre-signed URLs to download the output data from S3 storage
+
+example response :
+[source,json]
+----
+{
+  "outputs": [
+    {
+      "mimeType": null,
+      "schema": null,
+      "encoding": null,
+      "data": null,
+      "href": "https://maap-scientific-data.oss.eu-west-0.prod-cloud-ocb.orange-business.com:443/shared/sentinel1/s1-tiling/test-results/output/35SPB/s1a_35SPB_DES_036_20220908t041545.tif?AWSAccessKeyId=9SIO0VC5I08WMPOVEU7H&Expires=1684772581&Signature=tyjwKDTJO%2FafzcgtaLmuXrX1tDw%3D",
+      "id": "Generated output"
+    },
+    {
+      "mimeType": null,
+      "schema": null,
+      "encoding": null,
+      "data": null,
+      "href": "https://maap-scientific-data.oss.eu-west-0.prod-cloud-ocb.orange-business.com:443/shared/sentinel1/s1-tiling/test-results/output/35SPB/s1a_35SPB_DES_138_20220903t040738.tif?AWSAccessKeyId=9SIO0VC5I08WMPOVEU7H&Expires=1684772581&Signature=ghgUKtOSGv193KxW9hdKCoJ2MmY%3D",
+      "id": "Generated output"
+    }
+  ],
+  "links": null
+} 
+----
+
+* href is the pre-signed URL to download the output data
+
+== Delete execution
+
+delete  <copa-url>/wpst/processes/\{id}/jobs/\{jobId}
+
+Delete execution service expects the id of the workflow and the id of its execution. This workflow id is returned by deployment service in the processSummary/id field or by deployment list service (processes/id). The execution id is returned by the execute workflow service in the jobId field or by the list executions service
+
+
+== Monitor processes
+
+get <copa-url>/wpst/processes/monitor
+
+Returns monitoring information about executed processes for the user. These informations put in an ELK index when calling getStatus on a successful or failed process and are extracted from ELK by the monitoring service.
+
+example response :
+[source,json]
+----
+[
+  {
+    "elkDate": "2023-05-25-10-10-58.102",
+    "userName": "userName",
+    "processorName": "exec-wf-s1tiling-demo-2023-05-25-08-50-24",
+    "startDate": "2023-05-25-08-51-00.000",
+    "endDate": "2023-05-25-09-02-49.000",
+    "status": "SUCCEEDED",
+    "cpu": "1242s*(1 cpu)",
+    "ram": "69362s*100Mi",
+    "executionTime": "709s",
+    "cwlUrl": "https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/cwl/s1-tiling-demo/workflow_2.cwl"
+  },
+  {
+    "elkDate": "2023-05-25-10-12-50.992",
+    "userName": "userName",
+    "processorName": "exec-wf-s1tiling-demo-2023-05-25-10-11-58",
+    "startDate": "2023-05-25-10-12-31.000",
+    "endDate": "2023-05-25-10-13-14.000",
+    "status": "FAILED",
+    "cpu": "5s*(1 cpu)",
+    "ram": "172s*100Mi",
+    "executionTime": "43s",
+    "cwlUrl": "https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/cwl/s1-tiling-demo/workflow_2.cwl"
+  }
+]
+----
+
+* elkDate is the date monitoring data was added to ELK index
+* userName is the user login
+* processorName is the execution name
+* startDate is the execution start date
+* endDate is the execution end date
+* status is the execution status
+* cpu is the duration of CPU usage for the execution
+* ram is the duration of RAM usage for the execution
+* executionTime is the execution duration
+* cwlUrl is the URL of the CWL process
+
+For more details on the resource duration see https://argoproj.github.io/argo-workflows/resource-duration/

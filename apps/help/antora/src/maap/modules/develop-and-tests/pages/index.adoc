@@ -1,0 +1,4 @@
+= Welcome to Eclipse Che!
+:navtitle: Welcome
+
+This section describe the functioning and usage of the ESA-ADE ( Eclipse Che)

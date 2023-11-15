@@ -1,0 +1,66 @@
+= Welcome to MAAP!
+:author: Camille Clavié
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/antora/maap/index
+:revdate: October, 07 2022
+
+Welcome to the user documentation for the MAAP.
+
+== What is the MAAP?
+
+The *Multi-Mission Algorithm and Analysis Platform* (MAAP) is an ESA-NASA collaborative project focused on improving the understanding of aboveground terrestrial carbon dynamics.
+
+The MAAP will provide *computing capabilities* co-located with data as well as a set of tools and algorithms developed to support this specific field of research.
+
+It's a *collaboration framework* to share data, science algorithms and compute resources in order to foster and accelerate scientific research conducted by NASA and ESA scientists.
+
+*This guide aims to help users get started with using the platform for searching, visualizing, accessing, processing, querying, and sharing biomass relevant data to the MAAP*. These data, collected from satellites, aircraft, and ground stations, are organized into collections and granules. Collections are a grouping of files that share the same product specification. Granules are the individual files which are independently described, inventoried, and retrieved within a collection. Granules inherit additional attributes from their containing collection. Explanations of the various functions available in MAAP to use in the ADE will also be explored.
+
+____
+Find the link of the video presentation of the MAAP: https://scimaap.net/
+____
+
+
+=== The objectives of the MAAP
+
+* Enable researchers to easily discover, process, visualize, and analyze large volumes of data from both agencies
+* Provide tools and infrastructures to bring data into the same coordinate reference frame to enable comparison, analyze, data evaluation, and data generation
+* Provide a version-controlled science algorithm development environment that support tools, co-located data, and processing resources
+* Address intellectual property and sharing issues related to collaborative algorithm development and sharing of data and algorithms
+
+== BIOMASS mission presentation
+
+*_ESA’s forest mission, Biomass, uses a novel measuring technique to deliver completely new information on forest height and above-ground forest biomass from space. Forest biomass not only includes the tree trunk, but also the bark, branches, and leaves. Information from the Biomass mission will lead to a better understanding of the state of Earth’s forests, how they are changing over time, and advance our knowledge of the carbon cycle._*
+
+Absorbing around 8 Gigatonnes a year of carbon dioxide from the atmosphere a year, forests play a crucial role in the carbon cycle and climate system. However, forest degradation and deforestation, particularly in tropical regions, are causing much of this otherwise stored carbon to be released back into the atmosphere, exacerbating climate change. Quantifying the global cycle is essential to understanding the rapid changes that forests are undergoing and the subsequent implications for our climate.
+
+Measurements of forest biomass can be used as a proxy for stored carbon – but this is poorly quantified in most parts of the world. Data from the Biomass mission will reduce the major uncertainties in calculations of carbon stocks and fluxes on land, including carbon fluxes associated with land-use change, forest degradation and forest regrowth.
+
+NOTE: Biomass weighing Earth’s Forest from space: https://www.esa.int/ESA_Multimedia/Videos/2021/11/Biomass_weighing_Earth_s_forest_from_space
+
+Mapping forest biomass from space is a huge technical challenge. Forests are complex structures and different tree species, and dense canopies make them difficult to measure from space. Optical sensors offer a picture of forest cover, but only from the top of the canopy, not the structure beneath. Furthermore, tropical regions are typically covered by cloud, which further limits the use of optical sensors. The Biomass satellite, however, uses a specific type of radar instrument, which not only ‘sees’ through cloud cover, but penetrates the canopy layer which allows the actual biomass of trees to be estimated.
+
+Biomass is the first satellite to carry a fully polarimetric P-band synthetic aperture radar for interferometric imaging. Thanks to the long wavelength of P-band, around 70 cm, the radar signal can slice through the whole forest layer. This will result in the signal being scattered back to the satellite according to individual elements of the forest. The scattered back signal will therefore carry information about the forest structure that can be used to infer parameters such as forest biomass and forest height.
+
+Reliable knowledge of forest biomass also underpins the implementation of the UN Reducing Emissions from Deforestation and forest Degradation, REDD+, initiative – an international effort to reduce carbon emissions from deforestation and land degradation in developing countries.
+
+image::{imagesprefix}/Biomass_Satellite.png[]
+
+Observations from this new mission will also lead to better insight into rates of habitat loss and, hence, the impact this may be having on biodiversity in the forest environment. In addition, the Biomass mission will offer the opportunity to map subsurface geology in deserts, map the ice structure of ice sheets and map the topography of forest floors.
+The Biomass satellite is designed and built by a consortium of more than 50 companies under Airbus UK as the prime contractor, many of these companies have subcontractors and suppliers.
+
+Biomass is scheduled to be launched in 2024 on a Vega rocket from Europe’s Spaceport in Kourou, French Guiana.
+
+NOTE: To retrieve and read all information about Biomass mission, follow the link: https://www.esa.int/Applications/Observing_the_Earth/FutureEO/Biomass
+
+== Main features of the MAAP
+
+In this documentation, you can find a drop-down menu to consult article and help you in your work :
+
+* xref:explore-data:available-data.adoc[]
+Discovery, access, visualization and analysis of various seets of EO data, such as ESA and NASA EO missions, Copernicus S1 and S2 datasets, in situ measures or airborne campaign data
+* xref:login-the-maap:index.adoc[]
+* xref:develop-and-tests:index.adoc[]
+Code/algorithm development with scalable processing resources, through a complete cloud native Eclipse/Jupyter environment with Gitlab and continuous integration capabilities
+* xref:process-data:welcome-on-copa.adoc[]
+Scale computing capacity with COPA, a generic, cloud agnostic, open-source solution developed by Capgemini, to easily integrate and run algorithms processing chains with enough performance to carry out global and real-time studies.
+

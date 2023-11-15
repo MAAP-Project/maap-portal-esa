@@ -1,0 +1,25 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: self-made-redirect
+  annotations:
+    nginx.ingress.kubernetes.io/permanent-redirect: https://portal.val.esa-maap.org
+spec:
+  rules:
+  - host: www.esa-maap.org
+    http:
+      paths:
+      - backend:
+          serviceName: portal-nginx
+          servicePort: 80
+  - host: esa-maap.org
+    http:
+      paths:
+      - backend:
+          serviceName: portal-nginx
+          servicePort: 80
+  tls:
+  - hosts:
+    - wwww.esa-maap.org
+    - esa-maap.org
+    secretName: esa-maap-ssl-key

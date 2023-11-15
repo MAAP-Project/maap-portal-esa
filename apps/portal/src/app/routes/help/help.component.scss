@@ -1,0 +1,10 @@
+.content {
+  margin: 0 auto;
+  width: 680px;
+  word-break: break-word;
+
+  @media only screen and (max-width: 1023px) {
+    width: 100%;
+    padding: 5%;
+  }
+}

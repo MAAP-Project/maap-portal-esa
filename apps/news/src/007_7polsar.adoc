@@ -1,0 +1,18 @@
+= 7th ADVANCED TRAINING COURSE ON RADAR POLARIMETRY
+:author: Maap
+:revdate: June, 12 2023
+:article-background-url: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-common/news/assets/ESA_polsar.jpg
+:description: 7th ADdvanced Training Course On RADAR Polarimetry
+
+
+Hosted on the MAAP, the main objectives of the course are to::
+* Train the next generation of European and Canadian Principal Investigators (PIs);
+* Explain theoretical principles, processing algorithms, data products and their use in various applications;
+* Introduce available tools and methods for the exploitation of dual-pol and full-pol data;
+* Provide first-hand and up-to-date information on state-of-the-art methods and applications in Radar Polarimetry, Polarimetric SAR Interferometry and SAR Tomography;
+* Provide an introduction to the BIOMASS mission, data and applications.
+
+ 
+More information at : https://polarimetrycourse2023.esa.int/
+  
+

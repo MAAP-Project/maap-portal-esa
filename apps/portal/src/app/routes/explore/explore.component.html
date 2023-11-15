@@ -1,0 +1,19 @@
+<div class="explore-container">
+  <button class="explore-fullscreen" (click)="expand()">
+    <img src="./assets/svg/expand.svg" />
+  </button>
+  <iframe
+    class="explore-frame"
+    #exploreFrame
+    id="edavIframe"
+    title="Edav Iframe"
+    style="min-height: 900px"
+    allow="clipboard-read; clipboard-write"
+    height="900px"
+    width="900px"
+    allowfullscreen="true"
+    frameBorder="0"
+    [src]="exploreUrl | safe"
+  >
+  </iframe>
+</div>

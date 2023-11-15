@@ -1,0 +1,14 @@
+.news-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  font-size: 18px;
+  grid-gap: 36px;
+  max-width: 1200px;
+  margin: 40px auto 1.2em auto;
+
+  @media only screen and (max-width: 1023px) {
+    grid-template-columns: 1fr;
+    padding: 0px 5%;
+  }
+}

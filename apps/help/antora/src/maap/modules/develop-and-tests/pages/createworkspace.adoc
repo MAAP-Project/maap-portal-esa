@@ -1,0 +1,97 @@
+= Create New Workspace
+:navtitle: Create New worskpace
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-images/assets/user-guide/develop-and-test/create-wks
+
+
+== Creation steps
+
+WARNING: To do theses step, you must be logged in.
+
+
+* Navigate in the upper menu and select *Tools*, then *Development*
+
+* On the left menu, select *Create Workspace*
+
+* On the rigth, select *Add Workspace*
+
+* On the top, select *Quick Add*
+
+* At the bottom in the *Select a Sample* section, choose your preconfigured environment (also called "stack")
+
+
+_Jupyter_ : 
+
+Conda (miniconda3 4.7.12) environment based on Python 3.7 with a JupyterLab installed (version 2.1.4).
+
+The following Python package are installed :
+
+* OWSLib
+* requests
+
+The following system package are installed :
+
+* curl
+* g++
+* gcc 
+* gdal
+* git
+* rsync
+
+
+_Maap Theia Python_ :
+
+Conda environment with a VisualCode editor installed ( )
+
+_Sar Training_ : 
+
+Conda environment with a JupyterLab installed ( )
+
+_PolInSAR_ : 
+
+Conda environment with a JupyterLab installed ( )
+
+
+== Data access
+
+When creating a new workspace or restarting an existing workspace, a menu with the content of workspace is displayed.
+
+By default the workspace has the following structure
+
+[source,]
+--
+├── my-private-bucket
+└── s3-drive
+    ├── catalog-data
+    └── user-data
+--
+
+* *my-private-bucket* : Private folder only accessible by the logged user
+
+* *catalog-data* : contains data from the MAAP catalog and is organised as follows :
+
+** Campaign_data : with all data of the different campaign (biosar, afrisar, tropisar...)
+** EO_AUX_Products:with all auxilliary data
+** esacci : Data from biomass campain
+
+
+* *user-data*  : Shared folder accross all MAAP user
+
+All data are hosted on the MAAP and mounted as *read-only* : +
+They can be accessed with linux commands (ie POSIX access) or with the script *maap-s3.py* for direct interaction with the S3 bucket.
+
+A demonstrastion of the script *maap-s3.py* with the main commands can be found in the Git repository under esa-common/Demo Scripts/maap-s3.ipynb. +
+
+.Click to show maap-s3.py quick guide
+[%collapsible]
+===
+Toto
+===
+
+The following table gives for each folder the S3 path to use with the *maap-s3.py* script
+
+|===
+|Folder | S3 path | Permission
+| s3-drive/catalogue-data/Campaign_data	|bmap-catalogue-data/Campaign_data | Read-only
+| s3-drive/catalogue-data/EO_AUX_Products|	bmap-catalogue-data/EO_AUX_Products | Read-only
+| s3-drive/catalogue-data/esacci |	bmap-catalogue-data/esacci | Read-only
+| s3-drive/user-data |	maap-scientific-data/shared | Read-only with POSIX access, RW with maap-s3.py

@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,400i|Open+Sans:400,400i,700|Ropa+Sans:400,400i|Source+Code+Pro:400,700&subset=latin-ext');
+
+body {
+  margin: 0px;
+  font-family: 'Merriweather', serif;
+  height: 100vh;
+}
+
+maap-esa-portal-root {
+  height: 100%;
+  display: block;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-blue-light2: #9cb7e6;
+  --color-blue-light: #0098db;
+  --color-blue-dark: #00549f;
+  --color-blue-2-light: #00338d;
+  --color-blue-2-dark: #002664;
+  --color-green-light: #008542;
+  --color-green-dark: #284e36;
+  --color-yellow-light: #fdc82f;
+  --color-yellow-dark: #b88b00;
+  --color-orange-light: #e37222;
+  --color-orange-dark: #9d5116;
+  --color-red-light: #d0103a;
+  --color-red-dark: #822433;
+  --color-link-visited: #4c2c92;
+  --color-black: #000000;
+  --color-grey-light: #d5d6d2;
+  --color-grey-light2: #9a9b9c;
+  --color-grey-light3: #747678;
+  --color-grey-dark: #4d4f53;
+  --color-silver: #8b8d8e;
+  --color-white: #ffffff;
+}

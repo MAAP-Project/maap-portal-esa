@@ -1,25 +1,43 @@
-**/*.iml
-**/.ivy
-**/.classpath
-**/.project
-**/.sass-cache
-**/.settings
-**/bin
-**/build
-**/build_gradle
-**/node_modules
-**/test-coverage
-**/tmp
-**/.web_bundle_build
-.gradle
-.idea
-/bundles
-/gradle-*.properties
-/plugins-sdk/**/classes
-/plugins-sdk/**/ivy.xml.MD5
-/plugins-sdk/**/liferay-hook.xml.processed
-/plugins-sdk/build.*.properties
-/plugins-sdk/dependencies/**/*.jar
-/plugins-sdk/dist
-/plugins-sdk/lib
-test-results
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# dependencies
+node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+.angular
+
+NX

@@ -1,0 +1,12 @@
+= Maap upgrade for V3D1
+:author: Maap
+:revdate: October, 15 2022
+:article-background-url: https://portal.val.esa-maap.org/portal-val/ESA/assets/HP-image.jpg
+:description: Maap upgrade for V3D1
+
+
+== *A new version of the Platform has been released !*
+
+*Notable updates in this release :*:: 
+* Replacement of the MAAP Portal Software by a simpler alternative, with reduced footprint leading to resource consumption reduction.
+* Replacing the Identity Management tool Gluu by Keyclock to streamline the implementation.

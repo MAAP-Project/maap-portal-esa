@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "AntoraPdf executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "playbookConfigFile": {
+      "type": "string"
+    },
+    "srcDirectory": {
+      "type": "string"
+    },
+    "outputPath": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "playbookConfigFile",
+    "srcDirectory"
+  ]
+}

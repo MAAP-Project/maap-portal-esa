@@ -1,0 +1,75 @@
+.communities-tab {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0px auto;
+
+  h1 {
+    font-weight: bold;
+    font-size: 40px;
+
+    @media only screen and (max-width: 1023px) {
+      padding: 0px 5%;
+    }
+  }
+
+  span {
+    color: rgb(33, 37, 41);
+    font-size: 16px;
+    font-weight: 400;
+
+    @media only screen and (max-width: 1023px) {
+      padding: 8px 5% 0 5%;
+      display: block;
+    }
+  }
+}
+.communities {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  font-size: 18px;
+  grid-gap: 36px;
+  max-width: 1200px;
+  margin: 40px auto 1.2em auto;
+
+  @media only screen and (max-width: 1023px) {
+    grid-template-columns: 1fr;
+    padding: 0px 5%;
+  }
+}
+
+.community {
+  width: 100%;
+  background-color: var(--card-bg);
+  border: var(--card-border-width) solid var(--card-border-color);
+  box-shadow: 0 1px 3px -1px rgb(0 0 0 / 60%);
+  color: var(--card-color);
+  overflow: var(--card-overflow);
+
+  a {
+    text-decoration: none;
+
+    @media only screen and (max-width: 1023px) {
+      display: block;
+    }
+  }
+}
+
+.community-img {
+  height: 50%;
+  width: 100%;
+}
+
+.community-title {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+
+  h3 {
+    color: #9a9b9c;
+    font-size: 22px;
+    line-height: 34px;
+    text-align: justify;
+    font-family: 'Merriweather', serif;
+    margin-bottom: 10px !important;
+  }
+}

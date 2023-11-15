@@ -1,0 +1,12 @@
+name: maap
+title: MAAP
+version: 1.0
+nav:
+- modules/ROOT/nav.adoc
+- modules/quick-start/nav.adoc
+- modules/login-the-maap/nav.adoc
+- modules/explore-data/nav.adoc
+- modules/develop-and-tests/nav.adoc
+- modules/process-data/nav.adoc
+- modules/api-management/nav.adoc
+

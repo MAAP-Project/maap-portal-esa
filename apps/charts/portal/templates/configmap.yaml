@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: portal-nginx-config
+data:
+  default.conf: |
+    server {
+        listen 80;
+        server_name {{ .Values.nginxConf.host }};
+
+        client_max_body_size 200M;
+
+        location {{ .Values.nginxConf.baseHref }} {
+            proxy_intercept_errors on;
+            error_page 400 401 403 404 = @fallback;
+
+            proxy_pass {{ .Values.nginxConf.s3Url }};
+        }
+
+        location @fallback {
+            rewrite ^ {{ .Values.nginxConf.baseHref }}/index.html break;
+            proxy_pass {{ .Values.nginxConf.s3Url }};
+        }
+
+        location / {
+            return 301 {{ .Values.nginxConf.baseHref }};
+        }
+    }

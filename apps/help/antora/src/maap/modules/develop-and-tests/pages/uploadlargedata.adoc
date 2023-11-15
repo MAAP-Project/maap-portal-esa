@@ -1,0 +1,15 @@
+= Upload Large Data in Jupyter
+:author: Camille Clavié
+
+By default the Jupyter provide a limit of 250Mb for uploading data in the Jupyter.
+
+This limitation cannot be changed because, the browser has it's own limitation and data manipulated by users are more and more bigger.
+
+So the MAAP provide a script allowing the user, using a cloud storage to store BIG data. The process is divided in 3 steps:
+
+. Upload the data from laptop to Maap S3
+. Login and open the workspace
+. Download the data from S3
+
+*Click on this link to follow mount S3 procedure with all command :*
+* xref:explore-data:mounts3menu.adoc[]

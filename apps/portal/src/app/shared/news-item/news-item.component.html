@@ -1,0 +1,18 @@
+<a class="news-card" routerLink="/news/{{ newsItem.id }}">
+  <img
+    *ngIf="newsItem.articleBackgroundUrl"
+    class="news-image"
+    src="{{ newsItem.articleBackgroundUrl }}"
+  />
+  <div class="news-title">
+    <h3>
+      {{ newsItem.title }}
+    </h3>
+    <p>{{ newsItem.description }}</p>
+    <span>{{ newsItem.date | date }}</span>
+  </div>
+  <div class="news-footer">
+    <span>Read</span>
+    <img class="arrow" src="./assets/svg/arrow.svg" />
+  </div>
+</a>

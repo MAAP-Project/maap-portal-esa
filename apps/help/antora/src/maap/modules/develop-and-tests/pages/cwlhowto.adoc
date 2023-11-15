@@ -1,0 +1,68 @@
+= CWL How To
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/antora/eclipse-che/cwl
+
+
+== Introduction
+
+Algorithm can now be deployed in COPA from a CWL workflow. Upon deployment, a COPA workflow will be created with 3 steps :
+
+* copy-data-from-s3-to-copa (to transfer the input data from a S3 bucket to a PVC). This step will only appear if there is an 'file' input parameter
+* algo defined in the CWL file
+* transfer-from-copa-to-s3 (to transfer the output data from the PVC to a S3 bucket)
+
+Full CWL specification is not yet supported so this guide aims to explain how to define a CWL workflow for algorithm deployment.
+
+
+== CWL Structure
+
+Create a CWL workflow of type $graph with :
+
+* a workflow with one step calling a CLT
+* a CLT calling the algorithm docker container with its command and arguments
+
+See example workflow : https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/cwl/echo-test/workflow.cwl
+
+Workflow id is used to create the workflow name in the workflow controller and must therefore be unique otherwise an error will occur at deployment.
+Workflow id must contain only alphanumeric characters and -.
+
+
+== Input data
+
+All CLT arguments must be declared as workflow inputs (it is not possible to use transformations on workflow input, such as splitting an input into 2 CLT arguments).
+
+Workflow must have one and only one 'file' input, identified by containing the word "input" in its name. This input will be used as the input for the copy-data-from-s3-to-copa step.
+
+If several types of files are needed, such as an image file and auxiliary data, the operator should package the data, either in a directory or a tgz and use that dir or tgz as input. The algorithm should then handle the unpacking.
+
+WARNING: Data is copied directly into volume mount "/projects/data" so the algorithm should either use this directory as its working directory or have an argument to configure the working directory and set it to "/projects/data"
+
+
+== Output data
+
+CWL outputSource should be valued with algorithm absolute output path. This outputSource will be mapped to stage out algorithm source_dir input.
+
+
+== Workflow execution inputs
+
+In addition to the inputs defined in the algorithm deployment CWL workflow, some inputs are necessary for the 2 data transfer steps :
+
+* bucket_name : name of the S3 bucket containing the input data (input data path should be the path of the data inside the bucket, minus the bucket name)
+* copy_dir_or_file : a flag indicating whether the input data to copy is a directory (value=dir) or a file (value=file)
+* s3_destination : path to copy algo output data to, including bucket name
+
+These parameters are identified in the DPS tool (a GUI to launch a CWL workflow) with the prefix Stage-in or Stage-out.
+
+
+== Parallelization
+
+At execution time, it is possible to parallelize workflow execution on 'file' input data.
+
+For this to happen, you need 2 conditions :
+
+* a scatter method must be defined in the CWL workflow with the value "parallel" as in the example workflow
+* the 'file' input data should be given as a list of paths like [\"path1\", \"path2\", \"path3\"]. This is handled automatically by the DPS tool when adding multiple input URLs.
+
+In this case, the execution workflow will operate a fan-out on input data. With the 3 paths above, the execution workflow will split into 3 branches executing the 3 steps of the deployment workflow for each path value. Other inputs will be passed in full to each branch.
+
+image::{imagesprefix}/Fan-out.png[Fan-out]
+

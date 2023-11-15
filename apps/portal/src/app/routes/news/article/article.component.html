@@ -1,0 +1,14 @@
+<div *ngIf="news$ | async as news">
+  <img class="article-img" src="{{ news.articleBackgroundUrl }}" />
+  <div class="article">
+    <div id="article-header">
+      <h1>{{ news.title }}</h1>
+      <h4>{{ news.date | date: 'fullDate' }}</h4>
+    </div>
+    <div
+      id="article-content"
+      *ngIf="newsContent$ | async as newsContent"
+      [innerHTML]="newsContent | safeHTML"
+    ></div>
+  </div>
+</div>

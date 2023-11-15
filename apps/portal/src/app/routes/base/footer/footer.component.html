@@ -1,0 +1,26 @@
+<footer class="footer">
+  <a class="footer-logo-link" routerLink="/">
+    <img class="footer-logo" src="./assets/nasaesa.png" />
+  </a>
+  <span class="footer-text">MAAP is a collaboration between ESA and NASA</span>
+  <div class="footer-links">
+    <ul>
+      <li>
+        <a routerLink="/privacy-policy">
+          <span>Privacy Policy</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://maap-project.org/">
+          <span>NASA MAAP</span>
+        </a>
+      </li>
+    </ul>
+    <div [style]="{ display: isAuthenticated$ ? 'block' : 'none'}">
+      <p class="footer-text" style="margin-top: 20px;">
+        Contact:
+        {{ supportEmail }}
+    </p>
+    </div>
+  </div>
+</footer>

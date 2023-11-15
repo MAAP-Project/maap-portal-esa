@@ -1,0 +1,33 @@
+.title {
+  font-family: 'Ropa Sans';
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-size: 2.7rem;
+  text-transform: uppercase;
+  color: var(--color-black);
+  text-align: center;
+}
+
+.section-title {
+  margin-bottom: 20px;
+  margin-top: 40px;
+  font-family: 'Ropa Sans';
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--color-black);
+}
+
+.faq-list {
+  margin-bottom: 30px;
+  margin-left: 40px;
+}
+
+.user-guides a {
+  color: var(--color-blue-dark);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.875;
+  font-family: 'Merriweather', serif;
+}

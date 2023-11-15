@@ -1,0 +1,11 @@
+= MAAP Joint-Team Face-to-Face Meeting for version 3D2
+:author: Maap
+:revdate: September, 29 2023
+:article-background-url: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-common/news/assets/ESRIN.jpg
+:description: MAAP Joint-Team Face-to-Face Meeting for version 3D2
+
+
+During 7 to 9 November, ESA and NASA will meet at ESRIN in Frascati (Italy), to jointly plan future MAAP evolutions and discuss about its design and implementation. +
+
+ +
+*Agenda is still under discussion.*

@@ -1,0 +1,168 @@
+= Welcome to COPA
+:author: Herman Tatani
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/antora/copa/algorithms/presentationcopa
+:revdate: October, 11 2022
+
+== Introduction
+
+====
+Copa is an orchestration tool with ready-to-use processing algorithms. It is possible to orchestrate a workflow using these algorithms, which will perform the processing of their choice while retrieving the products and data already uploaded to MAAP.
+====
+
+=== Technical presentation
+
+COPA is a software for defining and running compute-intensive workflows on a cluster of machines.
+COPA is based on top of :
+
+* Docker containers
+* Kubernetes cluster container manager
+This system provides high computational performance and has an easy access to the virtually computing power provided by the cloud infrastructure.
+COPA system is composed of 3 parts:
+* Application with graphical user interface, server and database which allows to the user to define, save and run workflows.
+* Workflow Controller for managing process sequences on the Kubernetes cluster.
+* Storage dedicated to store results of the algorithms
+
+The key point that needs to be noticed here is that algorithms will be integrated into COPA platform as “Docker Images”. This choice makes integration independent from technologies used to implement algorithms.
+
+== Access COPA
+
+_Prerequisite_
+log in to the MAAP platform with your credentials.
+Once logged, click on Tools in the menu, then click on Orchestrator. A new window is opened.
+
+image::{imagesprefix}/access.PNG[]
+
+== COPA functions
+
+=== List all workflows
+
+With COPA, a user can have the list of all the workflows that he has created.
+
+image::{imagesprefix}/Capture1.PNG[]
+
+On this view, he also has the possibility to create, run, delete or update his workflow.
+
+==== Create a workflow
+
+To create a workflow, one of the two possibility fo the user is to click on the button *New Workflow* at the bottom of the page.
+
+image::{imagesprefix}/Capture2.PNG[]
+
+An exemple of a workflow is represented by the image below :
+
+image::{imagesprefix}/workflow.PNG[]
+
+==== Run a workflow
+
+To run a workflow, the user must click on the *run* button in front of the name of the worflow.
+
+image::{imagesprefix}/Capture3.PNG[]
+
+==== Delete a workflow
+
+To delete a workflow, the user must click on the *delete* button in front of the name of the workflow.
+
+image::{imagesprefix}/Capture4.PNG[]
+
+==== Update a workflow
+
+To update a workflow, the user must click on the *update* button in front of the name of the workflow.
+
+image::{imagesprefix}/Capture5.PNG[]
+
+=== List all workflow instances
+
+When a user run a workflow, it creates a workflow instance which represents a single execution of a workflow and it is running on a cluster.
+
+image::{imagesprefix}/Capture6.PNG[]
+
+On this view, he also has the possibility to visualize the status of its execution, the progression, to delete his instance and also the buttion which will show him the logs of his execution.
+
+==== Visualize execution logs
+
+A user can visualise execution logs of each algorithm (process or block) which composed his workflow instance to make sure that everything went well during the execution or to help correct possible problems related to the execution.
+
+image::{imagesprefix}/Capture7.PNG[]
+
+After clicking on the *More Info* button which is in front on the workflow instance name, the user will be redirect to the diagram representing the workflow.
+Then he can click on a block representing a process or an algorithm to see his execution log.
+
+====
+The *Green* block mean that the process has been successfully executed.
+The *Red* block mean that the process encountered problems during its execution.
+You can see execution logs for both block through the same process.
+====
+
+image::{imagesprefix}/Capture8.PNG[]
+
+Then select a block by clicking on it and after that click on *Display/Hide Panel* button.
+
+image::{imagesprefix}/Capture9.PNG[]
+
+On the Panel, open the *Logs* menu by clicking on it. Now you can visualise the execution logs.
+
+image::{imagesprefix}/Capture10.PNG[]
+
+=== New workflow
+
+To create a workflow, the user can click on *New Workflow* on the left menu.
+
+image::{imagesprefix}/Capture0.PNG[]
+
+On this page, the user can fill all his workflow informations like the workflow's name, the bpmn diagram and the algorithms he want to use in his workflow, the configuration of the algorithms that you chose.
+
+First you can choose the workflow name's
+
+WARNING: Do not use special characters! No spaces, capital letters or any other characters than letters and numbers
+
+then click on the input "Find an Algorithm" and click on "Search" icon (if you don't know the algorithm you need). All available algorithms list is displayed.
+
+image::{imagesprefix}/Find_Algorithms.png[]
+
+Next, you can create a new diagram :
+
+image::{imagesprefix}/COPA_Create_New_Diagram.png[]
+
+A tools box is displayed, you can start building your workflow :
+
+image::{imagesprefix}/ToolsBox_New_Diagram.png[]
+
+The first step is to build a box in which you will fill your algorithm
+
+image::{imagesprefix}/New_Box_COPA.png[]
+image::{imagesprefix}/Choose_Algo_Diagram_COPA.png[]
+
+After you must configurate your algorithm with configuration pannel. Depending on the chosen algorithms you will have to fill in a number of different mandatory or optional parameters: Id, name, S3 filepath destination, inputs/outputs, title, description, etc.
+
+image::{imagesprefix}/PannelConfig_Diagram_COPA.png[]
+image::{imagesprefix}/PannelConfig2_Diagram_COPA.png[]
+image::{imagesprefix}/PannelConfig3_Diagram_COPA.png[]
+
+Finally, don't forget to end your request/process with an endPoint (figure below) :
+
+image::{imagesprefix}/EndEvent_Diagram_COPA.png[]
+
+Now you can save your workflow and save it in the workflow list.
+You can go back to your work and modify your workflow (parameters, number of algorithms, etc.) or you can run it directly.
+
+image::{imagesprefix}/SaveWorkflow_Diagram_COPA.png[]
+image::{imagesprefix}/New_Workflow_Created.png[]
+
+The link below will redirect you to an example of workflow creation, step by step.
+
+xref:create-first-workflow.adoc[]
+
+=== List user products
+A user can have the list of the product that he has generated through the execution of his workflow.
+On this interface, he can visualize:
+
+* The name of his product
+* The name of the workflow instance which generate the product
+* The size of the product
+* The date of the last modification of the product
+* Some possible action that he can do on his product:
+** delete the product by clicking on the delete button
+** select the product
+** ingest the product in edav by clicking on the ingest button
+
+image::{imagesprefix}/Capture11.PNG[]

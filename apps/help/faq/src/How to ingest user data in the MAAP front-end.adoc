@@ -1,0 +1,48 @@
+= How to ingest user data in the MAAP front-end ?
+
+:imagesprefix: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-dev/assets/faq/faq2
+:revdate: August, 12 2022
+
+User data ingestion can be done with Eclipse Che or Copa
+
+== Ingestion from Eclipse Che using a Jupyter Notebook
+
+Open your workspace in Eclipse Che and clone the Demo-scripts repository
+
+* _git clone https://repo.uat.maap-project.org/esa-common/demo-scripts.git_
+
+Run the next commands to install necessary libraries
+
+* _conda install --freeze-installed rasterio_
+* _conda install --freeze-installed ipywidgets_
+* _jupyter labextension install @jupyter-widgets/jupyterlab-manager_
+
+Refresh your web page open the notebook */demo-scripts/edav/user-data-ingest-from-module.ipynb*
+
+As described in the screen below, you can ingest a local file or a remote file already stored on s3 storage
+
+image::{imagesprefix}/image5.png[]
+
+Execute the notebook and fill the parameters of your ingestion (use case example - ingestion from local file)
+
+image::{imagesprefix}/image6.png[]
+
+=== Results
+
+To visualize the results open the MAAP front-end and your result should be in the User-data catalog as the screen below
+
+image::{imagesprefix}/image7.png[]
+
+== Ingestion from COPA
+
+Open Copa by clicking on Orchestrator in the tools menu
+
+Check this help page to understand how to use copa if necessary : *COPA > Use COPA interface*
+
+Create your workflow and use the algorithm _ingest-user-data-in-edav_ to ingest data in the MAAP front-end.
+
+WARNING: Don't forget to fill the configuration parameters.
+
+image::{imagesprefix}/image8.png[]
+
+Then after the execution of you workflow you can also visualize your file in the MAAP front-end from the User-data catalog

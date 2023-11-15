@@ -1,0 +1,5 @@
+apiVersion: v2
+name: nginx-portal
+description: A Helm chart for MAAP portal nginx
+type: application
+version: 0.1.0

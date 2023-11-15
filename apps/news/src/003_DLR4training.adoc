@@ -1,0 +1,9 @@
+= 4th DLR PolInSAR course
+:author: Maap
+:revdate: November, 21 2022
+:article-background-url: https://s3public.oss.eu-west-0.prod-cloud-ocb.orange-business.com/portal-common/news/assets/polinsar_training.jpg
+
+
+Hosted on the MAAP, the DLR PolInSAR course is an online, hands-on course that aims to develop an understanding of the information content of multi-parameter SAR data. +
+
+Main information at: https://eo4society.esa.int/event/4th-edition-of-the-dlr-esa-open-polinsar-training-course/

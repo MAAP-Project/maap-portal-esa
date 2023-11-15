@@ -1,0 +1,7 @@
+<div *ngIf="orchestratorUrl$ | async as orchestratorUrl">
+  <iframe
+    [frameBorder]="0"
+    [src]="orchestratorUrl | safe"
+    [height]="iframeHeight"
+  ></iframe>
+</div>

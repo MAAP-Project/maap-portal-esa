@@ -1,0 +1,23 @@
+image: node:16.15
+
+stages:
+  - build
+  - deploy
+
+before_script:
+  - npm install
+
+build_master:
+  stage: build
+  script:
+  - npm run nx build portal --base-href=/portal-dev/ESA/ -c development --skip-nx-cache
+  only: ['master']
+
+deploy_master:
+  image: python:latest
+  stage: deploy
+  before_script:
+    - pip install awscli
+  script:
+    - aws s3 sync ./dist/apps/portal/ s3://s3public/portal-dev/ESA/ --delete --endpoint https://oss.eu-west-0.prod-cloud-ocb.orange-business.com
+  only: ['master']

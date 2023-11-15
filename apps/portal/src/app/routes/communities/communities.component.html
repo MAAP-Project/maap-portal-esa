@@ -1,0 +1,17 @@
+<div class="communities-tab">
+  <h1>Share and collaborate using the joint ESA NASA communities</h1>
+  <span>
+    Participating in the MAAP Community is a great way to share technical
+    and non-technical information betweeen the MAAP users
+  </span>
+  <div class="communities">
+    <div class="community" *ngFor="let community of communitiesList">
+      <a href="{{ community.url }}">
+        <img class="community-img" src="{{ community.img }}" />
+        <div class="community-title">
+          <h3>{{ community.title }}</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

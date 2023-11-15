@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "help-antora": "apps/help/antora",
+    "help-faq": "apps/help/faq",
+    "news": "apps/news",
+    "plugins-help": "libs/plugins/help",
+    "plugins-news": "libs/plugins/news",
+    "portal": "apps/portal"
+  }
+}

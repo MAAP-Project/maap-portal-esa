@@ -1,0 +1,10 @@
+<maap-esa-portal-home-carousel></maap-esa-portal-home-carousel>
+<h2 class="home-news-section-title">Latest News</h2>
+<div class="home-news-section">
+  <maap-esa-portal-news-item
+    [newsItem]="newsItem"
+    class="home-news"
+    *ngFor="let newsItem of newsList | async"
+  >
+  </maap-esa-portal-news-item>
+</div>

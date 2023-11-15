@@ -1,0 +1,73 @@
+<header>
+  <div class="logo-area" routerLink="/">
+    <img src="./assets/logo.png" alt="ESA MAAP Logo" />
+  </div>
+  <button class="menu-toggle" (click)="toggleResponsiveMenu()">
+    <img src="./assets/svg/menu.svg" />
+    <span>Menu</span>
+  </button>
+  <nav id="header-nav">
+    <ul class="menu">
+      <li class="menu-item">
+        <a class="menu-item-link" routerLink="/news"><span>News</span></a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-item-link" routerLink="/explore"><span>Explore</span></a>
+      </li>
+      <li class="menu-item" *ngIf="isAuthenticated$ | async">
+        <a class="menu-item-link"><span>Tools</span></a>
+        <button class="sub-menu-toggle" (click)="submenuToggleResponsiveMenu($event)">
+          <img alt="arrow-down" src="./assets/svg/down-arrow.svg" />
+        </button>
+        <ul class="sub-menu">
+          <li>
+            <a [href]="developmentUrl" target="_blank"><span itemprop="name">Development</span></a>
+          </li>
+          <li>
+            <a routerLink="/tools/DPS"><span itemprop="name">DPS</span></a>
+          </li>
+          <li>
+            <a routerLink="/tools/orchestrator"><span itemprop="name">Orchestrator</span></a>
+          </li>
+          <li>
+            <a [href]="gitlabUrl" target="_blank"><span itemprop="name">Git Repository</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-item">
+        <a class="menu-item-link" routerLink="/communities"><span>Communities</span></a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-item-link"><span>Help</span></a>
+        <button class="sub-menu-toggle" (click)="submenuToggleResponsiveMenu($event)">
+          <img alt="arrow-down" src="./assets/svg/down-arrow.svg" />
+        </button>
+        <ul class="sub-menu">
+          <li>
+            <a href="./docs/index.html"><span>User Guides</span></a>
+          </li>
+          <li>
+            <a routerLink="/help/terms-of-service"><span>Terms of Service</span></a>
+          </li>
+          <li>
+            <a routerLink="/help/open-policies"><span>Open Policies</span></a>
+          </li>
+          <!-- <li>
+            <a href="https://github.com/MAAP-Project/ZenHub/issues"
+              ><span>Bug/Feature Reports</span></a
+            >
+          </li> -->
+        </ul>
+      </li>
+      <li class="menu-item" *ngIf="(isAuthenticated$ | async) === false">
+        <a class="menu-item-link" routerLink="./login"><span>Login</span></a>
+      </li>
+      <li class="menu-item" *ngIf="isAuthenticated$ | async">
+        <a class="menu-item-link" (click)="logout()"><span>Logout</span></a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="header-banner" [style]="{ display: maintenanceInProgress ? 'block' : 'none' }">
+  {{ maintenanceText }}
+</div>

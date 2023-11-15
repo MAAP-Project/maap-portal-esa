@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "executors": {
+    "faq-build": {
+      "implementation": "./src/executors/faq/build/executor",
+      "schema": "./src/executors/faq/build/schema.json",
+      "description": "faq/build executor"
+    },
+    "antora-build": {
+      "implementation": "./src/executors/antora/build/executor",
+      "schema": "./src/executors/antora/build/schema.json",
+      "description": "antora/build executor"
+    },
+    "antora-pdf": {
+      "implementation": "./src/executors/antora/pdf/executor",
+      "schema": "./src/executors/antora/pdf/schema.json",
+      "description": "antora-pdf executor"
+    }
+  }
+}

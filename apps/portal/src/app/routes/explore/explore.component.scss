@@ -1,0 +1,22 @@
+.explore-container {
+  height: 100%;
+  width: 100%;
+}
+
+.explore-fullscreen {
+  float: right;
+  margin-right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  img {
+    height: 16px;
+  }
+}
+
+.explore-frame {
+  margin: 5px 10px;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+}

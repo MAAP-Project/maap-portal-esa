@@ -1,0 +1,19 @@
+<div class="faq-article" *ngIf="faq$ | async as faq">
+  <div class="breadcrumb">
+    <span>
+      <a routerLink="/">Home</a>
+    </span>
+    <span> / </span>
+    <span>
+      <a routerLink="/help/user-guides"> User Guides </a>
+    </span>
+  </div>
+  <div class="faq-header">
+    <h1>{{ faq.title }}</h1>
+  </div>
+  <div
+    id="faq-article-content"
+    *ngIf="faqContent$ | async as newsContent"
+    [innerHTML]="newsContent | safeHTML"
+  ></div>
+</div>

@@ -1,0 +1,33 @@
+h2 {
+  margin-bottom: 20px;
+  margin-top: 40px;
+  font-family: 'Ropa Sans';
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  font-size: 2rem;
+  color: var(--color-black);
+}
+
+p {
+  color: #000;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.875;
+  margin: 0 0 30px;
+  padding: 0;
+}
+
+ol,
+ul {
+  margin-bottom: 30px;
+  margin-left: 40px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.875;
+}
+
+ol ol,
+ul ul {
+  margin-bottom: 0px;
+}
