@@ -14,7 +14,7 @@
       <li class="menu-item">
         <a class="menu-item-link" routerLink="/explore"><span>Explore</span></a>
       </li>
-      <li class="menu-item" *ngIf="isAuthenticated$ | async">
+      <li class="menu-item" *ngIf="isAuthenticated$ && canActivate$ | async">
         <a class="menu-item-link"><span>Tools</span></a>
         <button class="sub-menu-toggle" (click)="submenuToggleResponsiveMenu($event)">
           <img alt="arrow-down" src="./assets/svg/down-arrow.svg" />
@@ -31,6 +31,9 @@
           </li>
           <li>
             <a [href]="gitlabUrl" target="_blank"><span itemprop="name">Git Repository</span></a>
+          </li>
+          <li *ngIf="isAuthenticated$ && isAdmin$ | async">
+            <a [routerLink]="['/tools/admin']"><span itemprop="name">Admin</span></a>
           </li>
         </ul>
       </li>
@@ -64,6 +67,9 @@
       </li>
       <li class="menu-item" *ngIf="isAuthenticated$ | async">
         <a class="menu-item-link" (click)="logout()"><span>Logout</span></a>
+      </li>
+      <li class="menu-item" *ngIf="isAuthenticated$ | async">
+        <span class="menu-item-text"><span>{{userName}}</span></span>
       </li>
     </ul>
   </nav>

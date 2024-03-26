@@ -1,85 +1,163 @@
-<div class="container" *ngIf="processes$ | async as processes">
-    <h1>Launch process</h1>
-    <button routerLink="/tools/Deployment" class="launch-process-button redirect cursor-button">Manage process</button>
+<p-dialog header="" 
+[(visible)]="dialogVisible" 
+[maximizable]="true" 
+[resizable]="true"
+[keepInViewport]="false" 
+[draggable]="true"
+[closable]="true"
+[style]="{width: '60vw', height: '60vh'}">    
+    <div class="container" *ngIf="processes$ | async as processes">
 
-    <nav class="navbar navbar-light ">
-        <p-autoComplete placeholder="Search for an algorithm" [showEmptyMessage]="true" [(ngModel)]="selectedAlgos"
-            [suggestions]="filtredAlgos" (completeMethod)="filterAlgo($event, processes)" (onSelect)="onSelect($event)"
-            (onBlur)="onUnselect($event)" [dropdown]="true" [style]="{width: '40vw'}" field="title">
-            <ng-template let-algo pTemplate="item">
-                <div class="item">
-                    <span> {{algo.title}} </span>
-                </div>
-            </ng-template>
-        </p-autoComplete>
+        <h1>Launch process</h1>
+        <nav class="navbar navbar-light ">
+            <p-autoComplete placeholder="Search for an algorithm" [showEmptyMessage]="true" [(ngModel)]="selectedAlgos"
+                [suggestions]="filtredAlgos" (completeMethod)="filterAlgo($event, processes)" (onSelect)="onSelect($event)"
+                (onBlur)="onUnselect($event)" [dropdown]="true" [style]="{width: '40vw'}" field="title">
+                <ng-template let-algo pTemplate="item">
+                    <div class="item">
+                        <span> {{algo.title}} </span>
+                    </div>
+                </ng-template>
+            </p-autoComplete>
+        </nav>
 
-    </nav>
+        <div class="launch-container">
+            <a class="launch-process-card" *ngIf="selectedAlgo">
+                <div class="card-body">
+                    <h3 class="title-algo">
+                        <b>{{selectedAlgo.title}} </b>
+                        <span class="info">
+                            <i class="pi pi-info-circle" [pTooltip]=selectedAlgo.abstract></i>
+                        </span>
+                    </h3>
 
-    <div class="launch-container">
-        <a class="launch-process-card" *ngIf="selectedAlgo">
-            <div class="card-body">
-                <h3 class="title-algo">
-                    <b>{{selectedAlgo.title}} </b>
-                    <span class="info">
-                        <i class="pi pi-info-circle" [pTooltip]=selectedAlgo.abstract></i>
+                    <span *ngIf="inputs">
+                        <p> Parameter : </p>
+                        <table>
+                            <tr *ngFor="let val of parameters; index as i">
+                                <th>
+                                    <span>
+                                        {{val.label}}
+                                        <i class="pi pi-question-circle" [pTooltip]=val.abstract></i>
+                                    </span>
+                                </th>
+                                <th>
+                                    <input type="text" pInputText class="input-path" [(ngModel)]=data[i]>
+                                </th>
+                            </tr>
+
+                        </table>
                     </span>
-                </h3>
+                    <div class="container-input" *ngIf="input_data">
+                        <span class="addurls" (click)="addUrl()">
+                            <p> Add input data</p>
+                            <i class="pi pi-plus-circle icon-add"></i>
+                        </span>
+                        <table id="input">
+                            <tr>
+                                <th style="width: 24.5rem;">
+                                    <span>
+                                        {{input_data.label}}
+                                        <i class="pi pi-question-circle" [pTooltip]=input_data.abstract></i>
+                                    </span>
+                                </th>
+                                <th>
+                                    <div *ngFor="let url of urls; index as i; trackBy: trackByFn;">
+                                        <input type="text" pInputText [(ngModel)]="urls[i]" class="input-url" />
+                                        <i class="pi pi-times icon-delete " (click)="deleteUrl(i)"></i>
+                                    </div>
+                                </th>
 
-                <span *ngIf="inputs">
-                    <p> Parameter : </p>
-                    <table>
-                        <tr *ngFor="let val of parameters; index as i">
-                            <th>
-                                <span>
-                                    {{val.label}}
-                                    <i class="pi pi-question-circle" [pTooltip]=val.abstract></i>
-                                </span>
-                            </th>
-                            <th>
-                                <input type="text" pInputText class="input-path" [(ngModel)]=data[i]>
-                            </th>
-                        </tr>
+                            </tr>
 
-                    </table>
-                </span>
-                <div class="container-input" *ngIf="input_data">
-                    <span class="addurls" (click)="addUrl()">
-                        <p> Add input data</p>
-                        <i class="pi pi-plus-circle icon-add"></i>
-                    </span>
-                    <table id="input">
-                        <tr>
-                            <th style="width: 24.5rem;">
-                                <span>
-                                    {{input_data.label}}
-                                    <i class="pi pi-question-circle" [pTooltip]=input_data.abstract></i>
-                                </span>
-                            </th>
-                            <th>
-                                <div *ngFor="let url of urls; index as i; trackBy: trackByFn;">
-                                    <input type="text" pInputText [(ngModel)]="urls[i]" class="input-url" />
-                                    <i class="pi pi-times icon-delete " (click)="deleteUrl(i)"></i>
-                                </div>
-                            </th>
+                        </table>
 
-                        </tr>
-
-                    </table>
-
+                    </div>
+                    <br>
+                    <button
+                        [ngClass]="isProcessRunning? 'disabled-button launch-process-button cursor-button':'launch-process-button cursor-button' "
+                        (click)="ExecuteWorkflow(selectedAlgo)" [disabled]="isProcessRunning">Run
+                        workflow</button>
                 </div>
-                <br>
-                <button
-                    [ngClass]="isProcessRunning? 'disabled-button launch-process-button cursor-button':'launch-process-button cursor-button' "
-                    (click)="ExecuteWorkflow(selectedAlgo)" [disabled]="isProcessRunning">Run
-                    workflow</button>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
+
+    <p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+
+    <div *ngIf="argoUrl$ | async as argoUrl">
+        <iframe [frameBorder]="0" [src]="argoUrl | safe" [height]="iframeHeight" width="100%"></iframe>
+    </div>
+</p-dialog>
+
+<h1>Launched processes</h1>
+<div class="container">
+
+    <div class="row launch-process-row">
+        <button class="launch-process-button cursor-button" (click)="dialogVisible = true">Launch process</button>
+        <button class="launch-process-button cursor-button" routerLink="/tools/Deployment">Manage process</button>
+        <button pButton class="launch-process-button cursor-button" icon="pi pi-refresh" (click)="getProcessesInfos()"></button>
+    </div>
+    
+    <div class="row table-container">
+            <p-table
+        [value]="(processInfos$ | async) ?? []"
+        [paginator]="true"
+        styleClass="p-datatable-gridlines p-datatable-striped"
+        [rowsPerPageOptions]="[10,25,50]"
+        [rows]="10"
+        [scrollable]="true" 
+        [resizableColumns]="true"
+        [loading]="isLoading">
+        scrollHeight="flex">
+            <ng-template pTemplate="header">
+                <tr style="font-size: 10px !important">
+                    <th pResizableColumn pSortableColumn="processorName">Execution name<p-sortIcon field="processorName"></p-sortIcon></th>
+                    <th pResizableColumn pSortableColumn="startDate">Start date<p-sortIcon field="startDate"></p-sortIcon></th>
+                    <th pResizableColumn pSortableColumn="endDate">End date<p-sortIcon field="endDate"></p-sortIcon></th>
+                    <th pResizableColumn pSortableColumn="status">Status<p-sortIcon field="status"></p-sortIcon></th>
+                    <th pResizableColumn>Details</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-processInfo>
+                <tr style="font-size: 10px !important">
+                    <td>{{processInfo.processorName}}</td>
+                    <td>{{processInfo.startDate}}</td>
+                    <td>{{processInfo.endDate}}</td>
+                    <td>{{processInfo.status}}</td>
+                    <td>
+                        <button pButton class="launch-process-button" icon="pi pi-info-circle" (click)="openDetailsPopup(processInfo)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    
 </div>
+<!-- Process Details Popup -->
+<p-dialog header="Process Details :" [(visible)]="displayDetailsPopup" [modal]="false" [style]="{width: '50vw'}">
+    <div *ngIf="selectedProcessInfo">
+        <div><strong>Exec Time:</strong> {{selectedProcessInfo.executionTime}} s</div>
+        <div><strong>RAM Consumed:</strong> {{selectedProcessInfo.ramConsumed | number}} MB</div>
+        <div><strong>CPU Consumed:</strong> {{selectedProcessInfo.cpuConsumed | number}} %</div>
+        <div class="details-buttons">
+            <div><strong>Show on Argo:</strong><button pButton class="launch-process-button"  icon="pi pi-external-link" (click)="openArgo(selectedProcessInfo.processorName)"></button></div>
+            <div><strong>Result:</strong> <button class="launch-process-button" pButton icon="pi pi-download" [disabled]='selectedProcessInfo.status !== "SUCCEEDED"' (click)="getJobResult(selectedProcessInfo.processorName)"></button></div>
+        </div>
+    </div>
+</p-dialog>
 
+<!-- show get results popup -->
+<p-dialog header="Download Job Execution Results:" [(visible)]="showGetResultsPopup" [modal]="false" [style]="{width: '50vw'}">
+    <p-progressSpinner *ngIf="getResultSpinner" class="get-results-spinner"></p-progressSpinner>
+    <ng-container *ngIf="hrefs | async as items; else noItems">
+        <a  class="link-download" *ngFor="let item of items" href="{{item}}">
+            <i class="pi pi-download"></i>
+            {{getUrlName(item)}}
+        </a>
+    </ng-container>
 
-<p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
-
-<div *ngIf="argoUrl$ | async as argoUrl">
-    <iframe [frameBorder]="0" [src]="argoUrl | safe" [height]="iframeHeight" width="100%"></iframe>
-</div>
+    <ng-template #noItems>
+        <p>{{errors$ | async}}</p>
+    </ng-template>
+</p-dialog>

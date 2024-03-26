@@ -12,6 +12,11 @@ import {
   AppConfigService,
   appConfigServiceFactory,
 } from './services/app-config/app-config.service';
+import { JwtModule } from "@auth0/angular-jwt";
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +26,13 @@ import {
     HttpClientModule,
     AppRoutingModule,
     OAuthModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: [environment.baseHref],
+        disallowedRoutes: [],
+      },
+    }),
   ],
   providers: [
     {
@@ -36,4 +48,4 @@ import {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

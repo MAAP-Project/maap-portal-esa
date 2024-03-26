@@ -1,0 +1,154 @@
+<div *ngIf="isAuthenticated$ && isAdmin$ | async">
+<h1>Admin</h1>
+
+<div class="launch-container">
+    <div *ngIf="!isAdminTokenValide">
+        <span>
+            Admin Token
+            <i class="pi pi-question-circle"></i>
+        </span>
+        <input type="password" pInputText class="input-path singular-input" [(ngModel)]="adminToken" id="admin-token-input"/>
+        <button [ngClass]="
+        (adminToken) ? 'send-admin-request-button cursor-button' : 'disabled-button send-admin-request-button cursor-button'" 
+        (click)="validateAdminToken()" [disabled]="!adminToken">send</button>
+    </div>
+
+    <div id="admin-opa" *ngIf="isAdminTokenValide">
+        <div class="admin-container">
+            <div>
+                <form [formGroup]="formType">
+                    <input type="radio" formControlName="type" value="rawBody" class="form-type-input"> raw
+                    <input type="radio" formControlName="type" value="formBody" class="form-type-input"> form
+                </form>
+            </div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <th>
+                            <span>
+                                url Path: *
+                                <i class="pi pi-question-circle"></i>
+                            </span>
+                        </th>
+                        <th>
+                            <input type="text" pInputText class="input-path" [(ngModel)]="urlPath" placeholder="example : s3">
+                        </th>
+                    </tr>
+
+
+                    <tr>
+                        <th>
+                            <span>
+                                Http method
+                                <i class="pi pi-question-circle"></i>
+                            </span>
+                        </th>
+                        <th>
+                            <select name="operationType" id="operationTypes" [(ngModel)]="operationType">
+                                <option value="PATCH">PATCH</option>
+                                <option value="POST">POST</option>
+                            </select>
+                        </th>
+                    </tr>
+
+                    <!-- <tr *ngIf="operationType === 'Edit'">
+                        <th>
+                            <span>
+                                Group
+                                <i class="pi pi-question-circle"></i>
+                            </span>
+                        </th>
+                        <th>
+                            <input type="text" pInputText class="input-path" [(ngModel)]="group">
+                        </th>
+                    </tr> -->
+                    
+                    <tr *ngIf="formType.controls['type'].value === 'rawBody'">
+                        <th>
+                            <span>
+                                Body
+                                <i class="pi pi-question-circle"></i>
+                            </span>
+                        </th>
+                        <th>
+                            <textarea rows="14" cols="90" pInputTextarea class="input-path" style="height: 100%;"
+                                [(ngModel)]="requestBodyJson">
+                    </textarea>
+                        </th>
+                    </tr>
+
+                    <tr *ngIf="formType.controls['type'].value === 'formBody'">
+                        <th>
+                            <span>
+                                Operation
+                                <i class="pi pi-question-circle"></i>
+                            </span>
+                        </th>
+                        <th>
+                            <select name="operation" id="operations" [(ngModel)]="operation">
+                                <option value="add">Add</option>
+                                <option value="remove">Remove</option>
+                            </select>
+                        </th>
+                    </tr>
+
+                    <tr *ngIf="formType.controls['type'].value === 'formBody'">
+                        <th>
+                            <span>
+                                Path
+                                <i class="pi pi-question-circle"></i>
+                            </span>
+                        </th>
+                        <th>
+                            <input type="text" pInputText class="input-path" [(ngModel)]="path">
+                        </th>
+                    </tr>
+                    <tr *ngIf="operation === 'add' && formType.controls['type'].value === 'formBody'">
+                        <th>
+                            <span>
+                                Action
+                                <i class="pi pi-question-circle"></i>
+                            </span>
+                        </th>
+                        <th>
+                            <input type="text" pInputText class="input-path" [(ngModel)]="action">
+                        </th>
+                    </tr>
+                    <tr *ngIf="operation === 'add' && formType.controls['type'].value === 'formBody'">
+                        <th>
+                            <span>
+                                Resource
+                                <i class="pi pi-question-circle"></i>
+                            </span>
+                        </th>
+                        <th>
+                            <input type="text" pInputText class="input-path" [(ngModel)]="resource">
+                        </th>
+                    </tr>
+
+                </table>
+                <br>
+                <div>
+                    <button [ngClass]="
+                    (urlPath && adminToken) ? 'send-admin-request-button cursor-button' : 'disabled-button send-admin-request-button cursor-button'" 
+                    (click)="EditPermission()" [disabled]="!urlPath">send</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div>
+            <span>
+                Service
+                <i class="pi pi-question-circle"></i>
+                <br>
+            </span>
+            <input type="text" pInputText class="input-path singular-input" [(ngModel)]="serviceFilter">
+            <button [ngClass]="
+                    (serviceFilter) ? 'send-admin-request-button cursor-button' : 'disabled-button send-admin-request-button cursor-button'" 
+                    (click)="filterOpaData()">Filter</button>
+                    <br>
+            <code name="opaDataJson" id="opaDataTextArea" cols="63" rows="10"><pre>{{opaDataJson}}</pre></code>
+        </div>
+    </div>
+</div>
+</div>

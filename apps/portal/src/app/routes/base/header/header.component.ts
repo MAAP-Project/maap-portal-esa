@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Event, NavigationStart, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { AppConfigService } from '../../../services/app-config/app-config.service';
-import { AuthenticationService } from '../../../services/authentication/authentication.service';
+import { AuthenticationService, UserProfil  } from '../../../services/authentication/authentication.service';
 import { environment } from '../../../../environments/environment';
+import { AuthorizationService } from '../../../services/authorization/authorization.service';
 
 @Component({
   selector: 'maap-esa-portal-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isAuthenticated$: Observable<boolean>;
+  isAdmin$:Observable<boolean>;
+  canActivate$: Observable<boolean>;
+  userProfil$!: Observable<UserProfil>;
+  userName="";
   maintenanceInProgress = false;
   maintenanceText = '';
   developmentUrl = environment.developmentUrl;
@@ -19,14 +24,22 @@ export class HeaderComponent {
 
   constructor(
     private authenticationService: AuthenticationService,
+    private authorizationService: AuthorizationService,
     private appConfigService: AppConfigService,
     private router: Router
   ) {
     this.isAuthenticated$ = this.authenticationService.isAuthenticated$;
+    this.isAdmin$ = this.authorizationService.isAdmin$;
+    this.canActivate$ = this.authorizationService.canActivate$
     this.maintenanceInProgress =
       this.appConfigService.config.maintenance.inProgress;
     this.maintenanceText = this.appConfigService.config.maintenance.text;
     this.router.events.subscribe(this.handleNavigationChange);
+  }
+  ngOnInit(): void {
+    this.userProfil$=this.authenticationService.userProfil$;
+    var userName = "";
+    this.userProfil$.subscribe(res => {this.userName = res.info.name})
   }
 
   logout() {

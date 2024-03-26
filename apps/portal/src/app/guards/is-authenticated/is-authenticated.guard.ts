@@ -12,6 +12,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { AuthorizationService } from '../../services/authorization/authorization.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class IsAuthenticatedGuard
 {
   constructor(
     private authenticationService: AuthenticationService,
+    private authorizationService: AuthorizationService,
     private router: Router
   ) {}
 
@@ -32,11 +34,19 @@ export class IsAuthenticatedGuard
     return this.router.parseUrl('/home');
   }
 
+  async _canActivate() {
+    const canActivate = this.authorizationService.canActivate;
+    if (canActivate) {
+      return true;
+    }
+    return this.router.parseUrl('/home');
+  }
+
   async canActivate(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
-    return await this._isAuthenticated();
+    return await this._isAuthenticated() && this._canActivate();
   }
 
   canActivateChild(

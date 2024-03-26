@@ -10,8 +10,13 @@ export const environment = {
   faqListFileUrl: baseHref + '/assets/faq/faq.json',
   faqPrefixUrl: baseHref + '/assets/faq/',
   documentationUrl: baseHref + '/docs/index.html',
+  authorizationURL : 'https://changeme',
+  adminURL : 'https://changeme',
+  adminGroup : 'changeme',
   processUrl: 'https://changeme',
   deployUrl: 'https://changeme',
+  argoUrl: 'https://changeme',
+  s3Url: 'https://changeme',
   exploreUrl: 'https://changeme',
   orchestratorUrl: 'https://changeme',
   developmentUrl: 'https://changeme/',
@@ -38,24 +43,5 @@ export const environment = {
 
     useIdTokenHintForSilentRefresh: false,
   },
-  identityProviderConfigNASA: {
-    // Url of the Identity Provider /.well-known/openid-configuration
-    issuer: 'https://changeme',
-
-    // URL of the SPA to redirect the user to after login
-    redirectUri: window.location.origin + baseHref + '/home/NASA',
-
-    clientId: 'changeme',
-
-    responseType: 'code',
-
-    // set the scope for the permissions the client should request
-    // Important: Request offline_access to get a refresh token
-    scope: 'openid profile email offline_access roles',
-
-    showDebugInformation: true,
-
-    useIdTokenHintForSilentRefresh: false,
-  },
-  support_email: 'changeme'
+  support_email: 'changeme',
 };

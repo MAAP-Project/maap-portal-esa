@@ -13,7 +13,4 @@ export class LoginComponent {
     this.authenticationService.login_esa();
   }
 
-  login_nasa() {
-    this.authenticationService.login_nasa();
-  }
 }

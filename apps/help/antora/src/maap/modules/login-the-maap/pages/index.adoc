@@ -1,3 +1,10 @@
-= How to login on the MAAP!
+= How to login on the MAAP
 
-WARNING: _Coming_ _soon_ ...
+
+* Click 'Login' in the upper right corner of the portal.
+* Click on the button 'Login with MAAP'
+
+Depending on your registration, you can also click on :
+
+* NASA : For NASA Earth Data registration
+* ESA EO : For ESA Earth Observation registration

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, firstValueFrom, map, Observable, of, Subject } from 'rxjs';
 import { ProcessService } from '../../../services/process/process.service';
 import { Message } from 'primeng/api';
+import { DpsMonitorService, ProcessInfo } from '../../../services/dps-monitor/dps-monitor.service';
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'maap-esa-portal-dps',
@@ -9,7 +11,7 @@ import { Message } from 'primeng/api';
   styleUrls: ['./dps.component.scss'],
 })
 export class DPSComponent implements OnInit {
-  isProcessRunning: boolean = false;
+  isProcessRunning = false;
   selectedAlgos: any;
   filtredAlgos: string[] = [];
   selectedAlgo: any;
@@ -20,12 +22,21 @@ export class DPSComponent implements OnInit {
   data: any[] = [];
   messages: Message[] = []
   list_id: any[] = [];
-  processes$ = new BehaviorSubject<any[] | null>(null);
+  processes$ = new BehaviorSubject<any[] | []>([]);
   processAttributes$ = new BehaviorSubject<any[] | null>(null);
+  processInfos$: Observable<ProcessInfo[]> = of([]);
+  dialogVisible = false;
+  displayDetailsPopup: boolean = false;
+  selectedProcessInfo: any;
+  showGetResultsPopup: boolean = false;
+  hrefs : Observable<string[]> = of([]);
+  errors$: Subject<string> = new Subject<string>();
+  getResultSpinner: boolean = true;
+  isLoading: boolean = true;
 
   iframeHeight = '1500px';
   argoUrl$ = new BehaviorSubject<string | null>(null);
-  constructor(private processService: ProcessService) {
+  constructor(private processService: ProcessService, private dpsMonitor: DpsMonitorService) {
     this.getProcesses()
     this.iframeHeight =
       window.innerHeight -
@@ -34,6 +45,7 @@ export class DPSComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getProcessesInfos();
   }
 
   addUrl() {
@@ -152,6 +164,14 @@ export class DPSComponent implements OnInit {
         this.argoUrl$.next(
           res.message
         );
+        this.isProcessRunning = false;
+        if(res?.description){
+          this.messages = [{ severity: 'error', summary: 'Error', detail: res?.code + ' : ' + res?.description, life: 6000 }];
+        }
+        else {
+          this.messages = [{ severity: 'success', summary: 'Success', detail: 'The workflow has been submitted.', life: 6000 }];
+
+        }
       } else {
         this.isProcessRunning = false;
       }
@@ -159,7 +179,57 @@ export class DPSComponent implements OnInit {
     })
   }
 
+  openArgo (name: string) {
+    window.open(environment.argoUrl+ name, '_blank')
+  }
+
   trackByFn(index: any) {
     return index;
+  }
+
+  openDetailsPopup(processInfo: any) {
+    this.displayDetailsPopup = true;
+    this.selectedProcessInfo = processInfo;
+  }
+
+  getProcessesInfos(){
+    this.isLoading = true;
+    this.processInfos$ = this.dpsMonitor.getProcessesInfos().pipe(
+        catchError(err => {
+          console.error('Error fetching process infos:', err);
+          return of([]);
+        }), finalize(
+            () => {
+              this.isLoading = false;
+            })
+        );
+  }
+
+  getJobResult(processorName :string) {
+    this.getResultSpinner = true;
+    this.hrefs = this.dpsMonitor.getJobResult(processorName)
+        .pipe(
+            map(response => {
+              if(response?.description){
+                this.errors$.next(response.description);
+              }
+             return  response.outputs?.map((item: { href: any; }) => item.href)
+            }),
+            catchError((error: any) => {
+              console.log(error);
+              return of([]);
+            }),
+            finalize(()=>{
+              this.getResultSpinner = false;
+            })
+        );
+    this.showGetResultsPopup = true;
+    this.displayDetailsPopup = false;
+
+  }
+
+  getUrlName(url: string) {
+    const lastSegment = url.split('/').pop();
+    return  lastSegment?.split('?')[0];
   }
 }

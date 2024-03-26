@@ -4,6 +4,7 @@ import { IsAuthenticatedGuard } from '../../guards/is-authenticated/is-authentic
 import { DPSComponent } from './dps/dps.component';
 import { OrchestratorComponent } from './orchestrator/orchestrator.component';
 import { DeploymentComponent } from './deployment/deployment.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,11 @@ const routes: Routes = [
     path: 'Deployment',
     canActivate: [IsAuthenticatedGuard],
     component: DeploymentComponent,
+  },
+  {
+    path: 'admin',
+    canActivate: [],
+    component: AdminComponent,
   }
 ];
 
