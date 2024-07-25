@@ -1,0 +1,174 @@
+= MAAP library User Guide
+
+== Introduction
+This guide provides a step-by-step tutorial on using the MAAP Toolbox library to interact with MAAP catalogs, perform searches, and retrieve data collections.
+
+There are two notebooks with indications on how to use the library:
+catalogs_test.ipynb will take you through the steps to query catalogs, collections and items and launch WPST processes on the collected items.
+test-mmap-s3.ipynb will show you the usage of the possible operations to be operated on S3 buckets
+
+== Setup
+
+First, import the necessary libraries:
+
+```python
+import datetime as dt
+import os
+import json
+from esa_maap_toolbox.catalog.maap_catalog import MAAPCatalog
+from esa_maap_toolbox.catalog.ops_item_search import OPSItemSearch
+from datetime import datetime
+import pytz
+from shapely.geometry import Polygon
+```
+
+== Instantiating MAAPCatalog
+
+Instantiate the MAAPCatalog object to gather catalogs:
+
+```python
+maapCatalog = MAAPCatalog()
+catalogs = maapCatalog.get_catalogs()
+
+for cat in catalogs:
+    print(cat.title)
+```
+
+From here you have both STAC and OpenSearch (OPS) catalogs
+
+== Retrieving Specific Catalogs
+
+Get a catalog by it's name (as displayed in explorer):
+```python
+ops_catalog = maapCatalog.get_catalog_by_name("ESA MAAP")
+```
+
+== Listing Collections
+
+Retrieve all collections from a catalog:
+```python
+ for collection in ops_catalog.get_collections():
+    print(collection.id)
+```
+
+== Getting a Specific Collection
+
+Retrieve a collection from the catalog (again, as displayed in explorer):
+```python
+ops_coll = ops_catalog.get_collection_by_name("AFRISAR_DLR")
+print(ops_coll)
+```
+
+== Searching for Items with Criteria
+
+Define bounding boxes and filters for item search:
+```python
+inside_points = [
+    (11.500000, -0.100000),  # Bottom-left
+    (11.500000, -0.270000),  # Bottom-right
+    (11.660000, -0.270000),  # Top-right
+    (11.660000, -0.100000),  # Top-left
+    (11.500000, -0.100000)   # Closing the polygon
+]
+
+filter = {
+    'SceneType_value' : 'M0'
+}
+
+# Instantiating datetimes corresponding to actual items values
+date_beginning = datetime.fromtimestamp(1454751840)
+date_beginning = pytz.UTC.localize(date_d)
+date_end = datetime.fromtimestamp(1454751840)
+date_end = pytz.UTC.localize(date_f)
+```
+
+Perform an item search with specific criteria:
+
+```python
+item_search_filter = ops_catalog.search(collection=ops_coll, bbox=inside_points, debut=date_beginning, fin=date_end, map_filter=filter)
+print(type(item_search_filter))
+for item in item_search_filter.get_items_filtered():
+    print(item.id)
+```
+
+You can also perform a search with no specific criteria, returning all items in the collection:
+```python
+item_search = ops_catalog.search(collection=ops_coll, bbox=None, debut=None, fin=None, map_filter=None)
+print(type(item_search))
+for item in item_search.get_items():
+    print(item.id)
+```
+== Ingesting User Data
+The following code demonstrates how to ingest user data by specifying metadata and the product location.
+The metadata includes details such as dataset ID, product date, spatial geometry, data type, scale, and other relevant information.
+'product_location' represents the storage location of the product, such as a GeoTiff file.
+```python
+
+data = {
+                "catalogueId": "ratio_VH_VV_Biosar1_105",
+                "datasetId": "ratio_VH_VV_Biosar1_105",
+                "productDate": "2020-11-29T13:50:30Z",
+                "grid": False,
+                "gridType": "Custom",
+                "geometry": json.dumps({"type": "Polygon", "coordinates": [[[58.49921249731845, 13.577403929486715], [58.49921249731846, 13.688651813293088], [58.428412073606594, 13.688651813293088], [58.428412073606594, 13.577403929486715], [58.49921249731845, 13.577403929486715]]]}),
+                "dataset_type": "Raster",
+                "subDatasetId": "Biosar1",
+                "dataset_dimension": "3",
+                "dataset_dimension_description": "Lat Long Time",
+                "dataset_description": "Ratio VH/VV scene 105 Biosar1",
+                "defaultViewMode": ["band1"],
+                "single_multiband": "1",
+                "title": "Ratio VH/VV (Biosar1_105)",
+                "geolocated": True
+          }
+
+product_location = "maap-scientific-data/shared/demo/ratio.tif"
+result = ops_catalog.generate_data_ingest(data, product_location)
+print(result)
+```
+== Ingesting Restricted User Data
+The following code demonstrates how to ingest restricted user data.
+```python
+data = {
+                "datasetId":"VAP_TEST_BMAAP_INT_01",
+                "productDate":"2020-01-01T00:00:00Z",
+                "geometry":{"type":"Polygon","coordinates":[[[-180,90],[-180,-90],[180,-90],[180,90],[-180,90]]]},
+                "subDatasetId":"TEST",
+                "minValue":0,
+                "maxValue":1,
+                "noDataValue":-9999,
+                "offsetData":0,
+                "dataType":"Int16",
+                "scale":1,
+                "size":1000,
+                "unit":"K",
+                "unitDescription":"Temperature",
+                "Datasettitle":"Test Dataset das vap",
+                "DatasetTemporalResolution":"Daily",
+                "DatasetDescription":"Test Dataset das vap",
+                "DatasetApplication":"Atmosphere",
+                "DatasetdataProviderName":"",
+                "DatasetdataPolicy":"",
+                "DatasetdataProviderUrl":"",
+                "DatasetlicenceId":"",
+                "DatasetdocumentationURL":""
+            }
+
+product_location = "s3://maap-restricted-data/dlr/test_ingest/bio_s2_dgm__1s_20170111t050609_20170111t050630_i_g03_m03_c03_t010_f001_i_abs_HH.tif"
+
+result = ops_catalog.generate_data_ingest(data, product_location)
+
+print(result)
+```
+== Deleting User Data
+The following code demonstrates how to delete user data by specifying dataset identifiers. Please note that the functionality to delete restricted user data is not implemented.
+```python
+data = {
+    "datasetId": "georef_Ecosse_class1",
+    "subDatasetId": "georef_Ecosse_claest_geocoded_1",
+    "catalogueId": ""
+}
+
+result = ops_catalog.delete_user_data(data)
+print(result)
+```

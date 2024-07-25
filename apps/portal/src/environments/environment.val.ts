@@ -17,7 +17,7 @@ export const environment = {
   deployUrl: 'https://changeme',
   argoUrl: 'https://changeme',
   s3Url: 'https://changeme',
-  exploreUrl: 'https://changeme',
+  exploreUrl: 'https://portal.val.esa-maap.org/edav-client/',
   orchestratorUrl: 'https://changeme',
   developmentUrl: 'https://changeme/',
   gitlabUrl: 'https://changeme',
